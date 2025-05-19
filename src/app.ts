@@ -51,8 +51,12 @@ app.get("/health", (req: Request, res: Response) => {
 
 // 404
 // Routes
-app.get("/", (req, res) => {
-  res.send("Secure Express Server");
+// app.get("/", (req, res) => {
+//   res.send("Secure Express Server");
+// });
+
+app.get("/", (_, res) => {
+  res.send("DiHy Care API working!");
 });
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
