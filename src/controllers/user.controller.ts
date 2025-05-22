@@ -66,7 +66,7 @@ const createUser = async (req: Request, res: Response) => {
 const user = {
   getUsers,
   getUser,
-  createUser
+  createUser,
 };
 
 export default user;

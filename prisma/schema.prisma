@@ -28,9 +28,31 @@ model User {
   updatedAt DateTime @updatedAt
 
   @@map("users")
+  UserDisease UserDisease[]
 }
 
 enum Sex {
 MALE
 FEMALE
+}
+
+model Disease {
+  id      Int      @id @default(autoincrement())
+  disease     String
+  typeDisease String
+
+  @@map("disease")
+  UserDisease UserDisease[]
+}
+
+model UserDisease {
+  user User     @relation(fields: [userId], references: [id])
+  userId    Int
+  disease Disease  @relation(fields: [diseaseId], references: [id])
+  diseaseId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@id([userId, diseaseId])
+  @@map("userDisease")
 }

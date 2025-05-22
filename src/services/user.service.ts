@@ -57,5 +57,5 @@ const createUser = async (user: Omit<User, "id">): Promise<User> => {
 export default {
   getUsers,
   getUser,
-  createUser
+  createUser,
 };
