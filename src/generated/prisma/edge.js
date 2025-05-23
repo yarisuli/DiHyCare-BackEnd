@@ -149,7 +149,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/yarisuli/Documents/Proyecto/DiHyCare-BackEnd/src/generated/prisma",
+      "value": "C:\\Users\\48115791\\Documents\\proyecto\\DiHyCare-BackEnd\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -158,17 +158,20 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "windows"
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/yarisuli/Documents/Proyecto/DiHyCare-BackEnd/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\48115791\\Documents\\proyecto\\DiHyCare-BackEnd\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.8.2",
@@ -177,6 +180,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -185,8 +189,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id          Int           @id @default(autoincrement())\n  email       String        @unique\n  password    String\n  name        String\n  surname     String\n  age         Int\n  sex         Sex\n  weight      Int\n  height      Int\n  createdAt   DateTime      @default(now())\n  updatedAt   DateTime      @updatedAt\n  UserDisease UserDisease[]\n\n  @@map(\"users\")\n}\n\nenum Sex {\n  MALE\n  FEMALE\n}\n\nmodel Disease {\n  id          Int           @id @default(autoincrement())\n  disease     String\n  typeDisease String\n  UserDisease UserDisease[]\n\n  @@map(\"disease\")\n}\n\nmodel UserDisease {\n  user      User     @relation(fields: [userId], references: [id])\n  userId    Int\n  disease   Disease  @relation(fields: [diseaseId], references: [id])\n  diseaseId Int\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@id([userId, diseaseId])\n  @@map(\"userDisease\")\n}\n",
-  "inlineSchemaHash": "1afdaa2e2dd6598c5730d2631b5b2345d17a198e09eef445c5ee317674befc97",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../src/generated/prisma\"\n  binaryTargets = [\"native\", \"windows\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id          Int           @id @default(autoincrement())\n  email       String        @unique\n  password    String\n  name        String\n  surname     String\n  age         Int\n  sex         Sex\n  weight      Int\n  height      Int\n  createdAt   DateTime      @default(now())\n  updatedAt   DateTime      @updatedAt\n  UserDisease UserDisease[]\n\n  @@map(\"users\")\n}\n\nenum Sex {\n  MALE\n  FEMALE\n}\n\nmodel Disease {\n  id          Int           @id @default(autoincrement())\n  disease     String\n  typeDisease String\n  UserDisease UserDisease[]\n\n  @@map(\"disease\")\n}\n\nmodel UserDisease {\n  user      User     @relation(fields: [userId], references: [id])\n  userId    Int\n  disease   Disease  @relation(fields: [diseaseId], references: [id])\n  diseaseId Int\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@id([userId, diseaseId])\n  @@map(\"userDisease\")\n}\n",
+  "inlineSchemaHash": "eed181826ec8bbbdd878da6c959822bb1693389197ae79704a7bc6ee71279b74",
   "copyEngine": true
 }
 config.dirname = '/'

@@ -7,6 +7,7 @@
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
+  binaryTargets = ["native", "windows", ,"darwin-arm64"]
 }
 
 datasource db {
@@ -56,3 +57,4 @@ model UserDisease {
   @@id([userId, diseaseId])
   @@map("userDisease")
 }
+
