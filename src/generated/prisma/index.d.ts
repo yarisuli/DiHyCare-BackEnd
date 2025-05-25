@@ -5303,7 +5303,7 @@ export namespace Prisma {
   interface DataFieldRefs {
     readonly id: FieldRef<"Data", 'Int'>
     readonly dataType: FieldRef<"Data", 'String'>
-    readonly value: FieldRef<"Data", 'Int'>
+    readonly value: FieldRef<"Data", 'Float'>
     readonly createdAt: FieldRef<"Data", 'DateTime'>
     readonly userId: FieldRef<"Data", 'Int'>
   }
@@ -6074,7 +6074,7 @@ export namespace Prisma {
     NOT?: DataWhereInput | DataWhereInput[]
     id?: IntFilter<"Data"> | number
     dataType?: StringFilter<"Data"> | string
-    value?: IntFilter<"Data"> | number
+    value?: FloatFilter<"Data"> | number
     createdAt?: DateTimeFilter<"Data"> | Date | string
     userId?: IntFilter<"Data"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -6095,7 +6095,7 @@ export namespace Prisma {
     OR?: DataWhereInput[]
     NOT?: DataWhereInput | DataWhereInput[]
     dataType?: StringFilter<"Data"> | string
-    value?: IntFilter<"Data"> | number
+    value?: FloatFilter<"Data"> | number
     createdAt?: DateTimeFilter<"Data"> | Date | string
     userId?: IntFilter<"Data"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -6120,7 +6120,7 @@ export namespace Prisma {
     NOT?: DataScalarWhereWithAggregatesInput | DataScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Data"> | number
     dataType?: StringWithAggregatesFilter<"Data"> | string
-    value?: IntWithAggregatesFilter<"Data"> | number
+    value?: FloatWithAggregatesFilter<"Data"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Data"> | Date | string
     userId?: IntWithAggregatesFilter<"Data"> | number
   }
@@ -6335,7 +6335,7 @@ export namespace Prisma {
 
   export type DataUpdateInput = {
     dataType?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutDataNestedInput
   }
@@ -6343,7 +6343,7 @@ export namespace Prisma {
   export type DataUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     dataType?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
   }
@@ -6358,14 +6358,14 @@ export namespace Prisma {
 
   export type DataUpdateManyMutationInput = {
     dataType?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DataUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     dataType?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
   }
@@ -6620,6 +6620,17 @@ export namespace Prisma {
     diseaseId?: SortOrder
   }
 
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type DataCountOrderByAggregateInput = {
     id?: SortOrder
     dataType?: SortOrder
@@ -6654,6 +6665,22 @@ export namespace Prisma {
     id?: SortOrder
     value?: SortOrder
     userId?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type UserDiseaseCreateNestedManyWithoutUserInput = {
@@ -6836,6 +6863,14 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserUpdateOneRequiredWithoutDataNestedInput = {
     create?: XOR<UserCreateWithoutDataInput, UserUncheckedCreateWithoutDataInput>
     connectOrCreate?: UserCreateOrConnectWithoutDataInput
@@ -6955,6 +6990,22 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type UserDiseaseCreateWithoutUserInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7048,7 +7099,7 @@ export namespace Prisma {
     NOT?: DataScalarWhereInput | DataScalarWhereInput[]
     id?: IntFilter<"Data"> | number
     dataType?: StringFilter<"Data"> | string
-    value?: IntFilter<"Data"> | number
+    value?: FloatFilter<"Data"> | number
     createdAt?: DateTimeFilter<"Data"> | Date | string
     userId?: IntFilter<"Data"> | number
   }
@@ -7310,21 +7361,21 @@ export namespace Prisma {
 
   export type DataUpdateWithoutUserInput = {
     dataType?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DataUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     dataType?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DataUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     dataType?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
