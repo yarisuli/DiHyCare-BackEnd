@@ -136,8 +136,8 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.DiseaseScalarFieldEnum = {
   id: 'id',
-  disease: 'disease',
-  typeDisease: 'typeDisease'
+  diseaseName: 'diseaseName',
+  diseaseType: 'diseaseType'
 };
 
 exports.Prisma.UserDiseaseScalarFieldEnum = {
@@ -145,6 +145,14 @@ exports.Prisma.UserDiseaseScalarFieldEnum = {
   diseaseId: 'diseaseId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DataScalarFieldEnum = {
+  id: 'id',
+  dataType: 'dataType',
+  value: 'value',
+  createdAt: 'createdAt',
+  userId: 'userId'
 };
 
 exports.Prisma.SortOrder = {
@@ -164,7 +172,8 @@ exports.Sex = exports.$Enums.Sex = {
 exports.Prisma.ModelName = {
   User: 'User',
   Disease: 'Disease',
-  UserDisease: 'UserDisease'
+  UserDisease: 'UserDisease',
+  Data: 'Data'
 };
 
 /**
