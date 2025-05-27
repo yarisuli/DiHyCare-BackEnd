@@ -2,10 +2,12 @@ import { User } from "../generated/prisma";
 // import { Author } from "../types/generalTypes";
 import prisma from "../utils/prisma.server";
 
+//get todos los usuarios
 const getUsers = async (): Promise<User[]> => {
   return prisma.user.findMany({});
 };
 
+//get un usuario por id
 const getUser = async (id: number): Promise<User | null> => {
   return prisma.user.findUnique({
     where: {
@@ -14,6 +16,7 @@ const getUser = async (id: number): Promise<User | null> => {
   });
 };
 
+//crear un usuario
 const createUser = async (user: Omit<User, "id">): Promise<User> => {
   const { email, password, name, surname, age, sex, weight, height } = user;
   return prisma.user.create({

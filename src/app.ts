@@ -8,6 +8,7 @@ const app = express();
 
 //IMPORT ROUTERS
 import userRouter from "./routes/user.router";
+import dataRouter from "./routes/data.router";
 
 // CORS configuration
 app.use(
@@ -34,10 +35,14 @@ if (process.env.LOG_REQUEST_RESPONSE === "true") {
     logAllResHeader: true,
   });
 }
+
 // ROUTES API
 
 //USER
 app.use("/user", userRouter);
+
+//DATA
+app.use("/data", dataRouter);
 
 // Health check endpoint
 app.get("/health", (req: Request, res: Response) => {

@@ -1,23 +1,23 @@
-// import { Author } from "../types/generalTypes";
 import { User } from "../generated/prisma";
 import userService from "../services/user.service";
-import authorService from "../services/user.service";
 import { Request, Response } from "express";
 
+//Get todos los usuarios
 const getUsers = async (req: Request, res: Response) => {
   try {
-    const users = await authorService.getUsers();
+    const users = await userService.getUsers();
     return res.status(200).json(users);
   } catch (error: any) {
     return res.status(500).json({ error: error.message });
   }
 };
 
+//Get un usuario por id
 const getUser = async (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id);
 
   try {
-    const user = await authorService.getUser(id);
+    const user = await userService.getUser(id);
     if (user) {
       return res.status(200).json(user);
     }
@@ -27,6 +27,7 @@ const getUser = async (req: Request, res: Response) => {
   }
 };
 
+//Crear un usuario
 const createUser = async (req: Request, res: Response) => {
   try {
     const user = req.body as User;
