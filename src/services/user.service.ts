@@ -1,6 +1,6 @@
-import { User } from "../generated/prisma";
+import { User } from '../generated/prisma';
 // import { Author } from "../types/generalTypes";
-import prisma from "../utils/prisma.server";
+import prisma from '../utils/prisma.server';
 
 //get todos los usuarios
 const getUsers = async (): Promise<User[]> => {
@@ -11,13 +11,13 @@ const getUsers = async (): Promise<User[]> => {
 const getUser = async (id: number): Promise<User | null> => {
   return prisma.user.findUnique({
     where: {
-      id: id,
-    },
+      id: id
+    }
   });
 };
 
 //crear un usuario
-const createUser = async (user: Omit<User, "id">): Promise<User> => {
+const createUser = async (user: Omit<User, 'id'>): Promise<User> => {
   const { email, password, name, surname, age, sex, weight, height } = user;
   return prisma.user.create({
     data: {
@@ -28,8 +28,8 @@ const createUser = async (user: Omit<User, "id">): Promise<User> => {
       age,
       sex,
       weight,
-      height,
-    },
+      height
+    }
   });
 };
 
@@ -60,5 +60,5 @@ const createUser = async (user: Omit<User, "id">): Promise<User> => {
 export default {
   getUsers,
   getUser,
-  createUser,
+  createUser
 };

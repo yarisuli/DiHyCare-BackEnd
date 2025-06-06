@@ -1,6 +1,6 @@
-import { User } from "../generated/prisma";
-import userService from "../services/user.service";
-import { Request, Response } from "express";
+import { User } from '../generated/prisma';
+import userService from '../services/user.service';
+import { Request, Response } from 'express';
 
 //Get todos los usuarios
 const getUsers = async (req: Request, res: Response) => {
@@ -21,7 +21,7 @@ const getUser = async (req: Request, res: Response) => {
     if (user) {
       return res.status(200).json(user);
     }
-    return res.status(404).json({ error: "User not found." });
+    return res.status(404).json({ error: 'User not found.' });
   } catch (error: any) {
     return res.status(500).json({ error: error.message });
   }
@@ -67,7 +67,7 @@ const createUser = async (req: Request, res: Response) => {
 const user = {
   getUsers,
   getUser,
-  createUser,
+  createUser
 };
 
 export default user;
