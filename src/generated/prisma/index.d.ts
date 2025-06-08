@@ -45,11 +45,29 @@ export namespace $Enums {
 
 export type Sex = (typeof Sex)[keyof typeof Sex]
 
+
+export const DataType: {
+  EXERCISE: 'EXERCISE',
+  MEDICATION: 'MEDICATION',
+  GLUCOSE: 'GLUCOSE',
+  CARBS: 'CARBS',
+  INSULIN: 'INSULIN',
+  PAS: 'PAS',
+  PAD: 'PAD',
+  HEART_RATE: 'HEART_RATE'
+};
+
+export type DataType = (typeof DataType)[keyof typeof DataType]
+
 }
 
 export type Sex = $Enums.Sex
 
 export const Sex: typeof $Enums.Sex
+
+export type DataType = $Enums.DataType
+
+export const DataType: typeof $Enums.DataType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -4646,16 +4664,18 @@ export namespace Prisma {
 
   export type DataMinAggregateOutputType = {
     id: number | null
-    dataType: string | null
+    dataType: $Enums.DataType | null
     value: number | null
+    description: string | null
     createdAt: Date | null
     userId: number | null
   }
 
   export type DataMaxAggregateOutputType = {
     id: number | null
-    dataType: string | null
+    dataType: $Enums.DataType | null
     value: number | null
+    description: string | null
     createdAt: Date | null
     userId: number | null
   }
@@ -4664,6 +4684,7 @@ export namespace Prisma {
     id: number
     dataType: number
     value: number
+    description: number
     createdAt: number
     userId: number
     _all: number
@@ -4686,6 +4707,7 @@ export namespace Prisma {
     id?: true
     dataType?: true
     value?: true
+    description?: true
     createdAt?: true
     userId?: true
   }
@@ -4694,6 +4716,7 @@ export namespace Prisma {
     id?: true
     dataType?: true
     value?: true
+    description?: true
     createdAt?: true
     userId?: true
   }
@@ -4702,6 +4725,7 @@ export namespace Prisma {
     id?: true
     dataType?: true
     value?: true
+    description?: true
     createdAt?: true
     userId?: true
     _all?: true
@@ -4795,8 +4819,9 @@ export namespace Prisma {
 
   export type DataGroupByOutputType = {
     id: number
-    dataType: string
+    dataType: $Enums.DataType
     value: number
+    description: string | null
     createdAt: Date
     userId: number
     _count: DataCountAggregateOutputType | null
@@ -4824,6 +4849,7 @@ export namespace Prisma {
     id?: boolean
     dataType?: boolean
     value?: boolean
+    description?: boolean
     createdAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4833,6 +4859,7 @@ export namespace Prisma {
     id?: boolean
     dataType?: boolean
     value?: boolean
+    description?: boolean
     createdAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4842,6 +4869,7 @@ export namespace Prisma {
     id?: boolean
     dataType?: boolean
     value?: boolean
+    description?: boolean
     createdAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4851,11 +4879,12 @@ export namespace Prisma {
     id?: boolean
     dataType?: boolean
     value?: boolean
+    description?: boolean
     createdAt?: boolean
     userId?: boolean
   }
 
-  export type DataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dataType" | "value" | "createdAt" | "userId", ExtArgs["result"]["data"]>
+  export type DataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dataType" | "value" | "description" | "createdAt" | "userId", ExtArgs["result"]["data"]>
   export type DataInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -4873,8 +4902,9 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      dataType: string
+      dataType: $Enums.DataType
       value: number
+      description: string | null
       createdAt: Date
       userId: number
     }, ExtArgs["result"]["data"]>
@@ -5302,8 +5332,9 @@ export namespace Prisma {
    */
   interface DataFieldRefs {
     readonly id: FieldRef<"Data", 'Int'>
-    readonly dataType: FieldRef<"Data", 'String'>
+    readonly dataType: FieldRef<"Data", 'DataType'>
     readonly value: FieldRef<"Data", 'Float'>
+    readonly description: FieldRef<"Data", 'String'>
     readonly createdAt: FieldRef<"Data", 'DateTime'>
     readonly userId: FieldRef<"Data", 'Int'>
   }
@@ -5774,6 +5805,7 @@ export namespace Prisma {
     id: 'id',
     dataType: 'dataType',
     value: 'value',
+    description: 'description',
     createdAt: 'createdAt',
     userId: 'userId'
   };
@@ -5795,6 +5827,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -5855,6 +5895,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'DataType'
+   */
+  export type EnumDataTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DataType'>
+    
+
+
+  /**
+   * Reference to a field of type 'DataType[]'
+   */
+  export type ListEnumDataTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DataType[]'>
     
 
 
@@ -6073,8 +6127,9 @@ export namespace Prisma {
     OR?: DataWhereInput[]
     NOT?: DataWhereInput | DataWhereInput[]
     id?: IntFilter<"Data"> | number
-    dataType?: StringFilter<"Data"> | string
+    dataType?: EnumDataTypeFilter<"Data"> | $Enums.DataType
     value?: FloatFilter<"Data"> | number
+    description?: StringNullableFilter<"Data"> | string | null
     createdAt?: DateTimeFilter<"Data"> | Date | string
     userId?: IntFilter<"Data"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -6084,6 +6139,7 @@ export namespace Prisma {
     id?: SortOrder
     dataType?: SortOrder
     value?: SortOrder
+    description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -6094,8 +6150,9 @@ export namespace Prisma {
     AND?: DataWhereInput | DataWhereInput[]
     OR?: DataWhereInput[]
     NOT?: DataWhereInput | DataWhereInput[]
-    dataType?: StringFilter<"Data"> | string
+    dataType?: EnumDataTypeFilter<"Data"> | $Enums.DataType
     value?: FloatFilter<"Data"> | number
+    description?: StringNullableFilter<"Data"> | string | null
     createdAt?: DateTimeFilter<"Data"> | Date | string
     userId?: IntFilter<"Data"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -6105,6 +6162,7 @@ export namespace Prisma {
     id?: SortOrder
     dataType?: SortOrder
     value?: SortOrder
+    description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
     _count?: DataCountOrderByAggregateInput
@@ -6119,8 +6177,9 @@ export namespace Prisma {
     OR?: DataScalarWhereWithAggregatesInput[]
     NOT?: DataScalarWhereWithAggregatesInput | DataScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Data"> | number
-    dataType?: StringWithAggregatesFilter<"Data"> | string
+    dataType?: EnumDataTypeWithAggregatesFilter<"Data"> | $Enums.DataType
     value?: FloatWithAggregatesFilter<"Data"> | number
+    description?: StringNullableWithAggregatesFilter<"Data"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Data"> | Date | string
     userId?: IntWithAggregatesFilter<"Data"> | number
   }
@@ -6319,53 +6378,60 @@ export namespace Prisma {
   }
 
   export type DataCreateInput = {
-    dataType: string
+    dataType: $Enums.DataType
     value: number
+    description?: string | null
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutDataInput
   }
 
   export type DataUncheckedCreateInput = {
     id?: number
-    dataType: string
+    dataType: $Enums.DataType
     value: number
+    description?: string | null
     createdAt?: Date | string
     userId: number
   }
 
   export type DataUpdateInput = {
-    dataType?: StringFieldUpdateOperationsInput | string
+    dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
     value?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutDataNestedInput
   }
 
   export type DataUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    dataType?: StringFieldUpdateOperationsInput | string
+    dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
     value?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
   }
 
   export type DataCreateManyInput = {
     id?: number
-    dataType: string
+    dataType: $Enums.DataType
     value: number
+    description?: string | null
     createdAt?: Date | string
     userId: number
   }
 
   export type DataUpdateManyMutationInput = {
-    dataType?: StringFieldUpdateOperationsInput | string
+    dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
     value?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DataUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    dataType?: StringFieldUpdateOperationsInput | string
+    dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
     value?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
   }
@@ -6620,6 +6686,13 @@ export namespace Prisma {
     diseaseId?: SortOrder
   }
 
+  export type EnumDataTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.DataType | EnumDataTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DataType[] | ListEnumDataTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DataType[] | ListEnumDataTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDataTypeFilter<$PrismaModel> | $Enums.DataType
+  }
+
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -6631,10 +6704,31 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type DataCountOrderByAggregateInput = {
     id?: SortOrder
     dataType?: SortOrder
     value?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
   }
@@ -6649,6 +6743,7 @@ export namespace Prisma {
     id?: SortOrder
     dataType?: SortOrder
     value?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
   }
@@ -6657,6 +6752,7 @@ export namespace Prisma {
     id?: SortOrder
     dataType?: SortOrder
     value?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
   }
@@ -6665,6 +6761,16 @@ export namespace Prisma {
     id?: SortOrder
     value?: SortOrder
     userId?: SortOrder
+  }
+
+  export type EnumDataTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DataType | EnumDataTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DataType[] | ListEnumDataTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DataType[] | ListEnumDataTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDataTypeWithAggregatesFilter<$PrismaModel> | $Enums.DataType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDataTypeFilter<$PrismaModel>
+    _max?: NestedEnumDataTypeFilter<$PrismaModel>
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -6681,6 +6787,24 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type UserDiseaseCreateNestedManyWithoutUserInput = {
@@ -6863,12 +6987,20 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type EnumDataTypeFieldUpdateOperationsInput = {
+    set?: $Enums.DataType
+  }
+
   export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type UserUpdateOneRequiredWithoutDataNestedInput = {
@@ -6990,6 +7122,37 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumDataTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.DataType | EnumDataTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DataType[] | ListEnumDataTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DataType[] | ListEnumDataTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDataTypeFilter<$PrismaModel> | $Enums.DataType
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedEnumDataTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DataType | EnumDataTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DataType[] | ListEnumDataTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DataType[] | ListEnumDataTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDataTypeWithAggregatesFilter<$PrismaModel> | $Enums.DataType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDataTypeFilter<$PrismaModel>
+    _max?: NestedEnumDataTypeFilter<$PrismaModel>
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -7004,6 +7167,34 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type UserDiseaseCreateWithoutUserInput = {
@@ -7029,15 +7220,17 @@ export namespace Prisma {
   }
 
   export type DataCreateWithoutUserInput = {
-    dataType: string
+    dataType: $Enums.DataType
     value: number
+    description?: string | null
     createdAt?: Date | string
   }
 
   export type DataUncheckedCreateWithoutUserInput = {
     id?: number
-    dataType: string
+    dataType: $Enums.DataType
     value: number
+    description?: string | null
     createdAt?: Date | string
   }
 
@@ -7098,8 +7291,9 @@ export namespace Prisma {
     OR?: DataScalarWhereInput[]
     NOT?: DataScalarWhereInput | DataScalarWhereInput[]
     id?: IntFilter<"Data"> | number
-    dataType?: StringFilter<"Data"> | string
+    dataType?: EnumDataTypeFilter<"Data"> | $Enums.DataType
     value?: FloatFilter<"Data"> | number
+    description?: StringNullableFilter<"Data"> | string | null
     createdAt?: DateTimeFilter<"Data"> | Date | string
     userId?: IntFilter<"Data"> | number
   }
@@ -7336,8 +7530,9 @@ export namespace Prisma {
 
   export type DataCreateManyUserInput = {
     id?: number
-    dataType: string
+    dataType: $Enums.DataType
     value: number
+    description?: string | null
     createdAt?: Date | string
   }
 
@@ -7360,22 +7555,25 @@ export namespace Prisma {
   }
 
   export type DataUpdateWithoutUserInput = {
-    dataType?: StringFieldUpdateOperationsInput | string
+    dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
     value?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DataUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    dataType?: StringFieldUpdateOperationsInput | string
+    dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
     value?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DataUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    dataType?: StringFieldUpdateOperationsInput | string
+    dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
     value?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

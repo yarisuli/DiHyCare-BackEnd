@@ -12,7 +12,7 @@ const getAllData = async (req: Request, res: Response) => {
   }
 };
 
-//Get un usuario por id
+//get data de un usuario
 const getUserData = async (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id);
 
@@ -27,9 +27,21 @@ const getUserData = async (req: Request, res: Response) => {
   }
 };
 
+//crear data de un usuario
+const createData = async (req: Request, res: Response) => {
+  try {
+    const data = req.body as Data;
+    const newData = await dataService.createData(data);
+    return res.status(201).json(newData);
+  } catch (error: any) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 const user = {
   getAllData,
-  getUserData
+  getUserData,
+  createData
 };
 
 export default user;

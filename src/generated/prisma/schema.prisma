@@ -60,12 +60,26 @@ model UserDisease {
 }
 
 model Data {
-  id        Int      @id @default(autoincrement())
-  dataType  String //ENUM? 
-  value     Float
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
+  id          Int      @id @default(autoincrement())
+  dataType    DataType
+  value       Float
+  description String? //PARA TIPO INSULINA? 
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
 
   @@map("data")
+}
+
+enum DataType {
+  EXERCISE
+  MEDICATION
+
+  GLUCOSE
+  CARBS
+  INSULIN
+
+  PAS
+  PAD
+  HEART_RATE
 }

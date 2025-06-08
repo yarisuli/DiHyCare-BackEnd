@@ -15,7 +15,20 @@ const getUserData = async (id: number): Promise<Data | null> => {
   });
 };
 
+const createData = async (data: Omit<Data, 'id'>): Promise<Data> => {
+  const { dataType, value, description, userId} = data;
+  return prisma.data.create({
+    data: {
+      dataType,
+      value,
+      description,
+      userId
+    }
+  });
+};
+
 export default {
   getAllData,
-  getUserData
+  getUserData,
+  createData
 };

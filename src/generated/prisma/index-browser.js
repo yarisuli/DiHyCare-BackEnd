@@ -151,6 +151,7 @@ exports.Prisma.DataScalarFieldEnum = {
   id: 'id',
   dataType: 'dataType',
   value: 'value',
+  description: 'description',
   createdAt: 'createdAt',
   userId: 'userId'
 };
@@ -164,9 +165,25 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
 exports.Sex = exports.$Enums.Sex = {
   MALE: 'MALE',
   FEMALE: 'FEMALE'
+};
+
+exports.DataType = exports.$Enums.DataType = {
+  EXERCISE: 'EXERCISE',
+  MEDICATION: 'MEDICATION',
+  GLUCOSE: 'GLUCOSE',
+  CARBS: 'CARBS',
+  INSULIN: 'INSULIN',
+  PAS: 'PAS',
+  PAD: 'PAD',
+  HEART_RATE: 'HEART_RATE'
 };
 
 exports.Prisma.ModelName = {
