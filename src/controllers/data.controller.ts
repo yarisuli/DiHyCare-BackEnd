@@ -14,7 +14,7 @@ const getAllData = async (req: Request, res: Response) => {
 
 //get data de un usuario
 const getUserData = async (req: Request, res: Response) => {
-  const userId: number = parseInt(req.body.userId);
+  const userId: number = req.body.userId;
 
   try {
     const userData = await dataService.getUserData(userId);
