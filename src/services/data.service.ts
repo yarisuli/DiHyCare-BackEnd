@@ -7,10 +7,10 @@ const getAllData = async (): Promise<Data[]> => {
 };
 
 //get toda data de un usuario
-const getUserData = async (id: number): Promise<Data[]> => {
+const getUserData = async (userId: number): Promise<Data[]> => {
   return prisma.data.findMany({
     where: {
-      id: id
+      userId: userId,
     }
   });
 };

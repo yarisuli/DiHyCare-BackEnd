@@ -14,10 +14,10 @@ const getAllData = async (req: Request, res: Response) => {
 
 //get data de un usuario
 const getUserData = async (req: Request, res: Response) => {
-  const id: number = parseInt(req.params.id);
+  const userId: number = parseInt(req.body.userId);
 
   try {
-    const userData = await dataService.getUserData(id);
+    const userData = await dataService.getUserData(userId);
     if (userData) {
       return res.status(200).json(userData);
     }
