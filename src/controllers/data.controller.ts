@@ -27,6 +27,22 @@ const getUserData = async (req: Request, res: Response) => {
   }
 };
 
+//get data de un tipo especifico de un usuario
+const getUserDataType = async (req: Request, res: Response) => {
+  const id: number = parseInt(req.params.id);
+  const dataType: string = req.body.dataType;
+
+  try {
+    const userData = await dataService.getUserDataType(id, dataType);
+    if (userData) {
+      return res.status(200).json(userData);
+    }
+    return res.status(404).json({ error: 'Data from user not found.' });
+  } catch (error: any) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 //crear data de un usuario
 const createData = async (req: Request, res: Response) => {
   try {
@@ -41,6 +57,7 @@ const createData = async (req: Request, res: Response) => {
 const user = {
   getAllData,
   getUserData,
+  getUserDataType,
   createData
 };
 
