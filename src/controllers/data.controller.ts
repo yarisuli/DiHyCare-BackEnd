@@ -29,7 +29,7 @@ const getUserData = async (req: Request, res: Response) => {
 
 //get data de un tipo especifico de un usuario
 const getUserDataType = async (req: Request, res: Response) => {
-  const userId: number = parseInt(req.body.userId);
+  const userId: number = req.body.userId;
   const dataType: string = req.body.dataType;
 
   try {
