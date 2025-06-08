@@ -29,11 +29,11 @@ const getUserData = async (req: Request, res: Response) => {
 
 //get data de un tipo especifico de un usuario
 const getUserDataType = async (req: Request, res: Response) => {
-  const id: number = parseInt(req.params.id);
+  const userId: number = parseInt(req.body.userId);
   const dataType: string = req.body.dataType;
 
   try {
-    const userData = await dataService.getUserDataType(id, dataType);
+    const userData = await dataService.getUserDataType(userId, dataType);
     if (userData) {
       return res.status(200).json(userData);
     }
