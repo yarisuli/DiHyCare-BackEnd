@@ -7,8 +7,8 @@ const getAllData = async (): Promise<Data[]> => {
 };
 
 //get toda data de un usuario
-const getUserData = async (id: number): Promise<Data | null> => {
-  return prisma.data.findUnique({
+const getUserData = async (id: number): Promise<Data[]> => {
+  return prisma.data.findMany({
     where: {
       id: id
     }
