@@ -4,7 +4,7 @@ import { Router } from 'express';
 const router = Router();
 
 router.get('', dataController.getAllData);
-router.get('/:id', dataController.getUserData);
+router.get('/user', dataController.getUserData);
 router.get('/type', dataController.getUserDataType);
 router.post('', dataController.createData);
 
