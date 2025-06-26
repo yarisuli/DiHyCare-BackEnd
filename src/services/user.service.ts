@@ -1,3 +1,4 @@
+import { get } from 'http';
 import { User } from '../generated/prisma';
 // import { Author } from "../types/generalTypes";
 import prisma from '../utils/prisma.server';
@@ -69,5 +70,6 @@ const createUser = async (user: Omit<User, 'id'>): Promise<User> => {
 export default {
   getUsers,
   getUser,
+  getUserByToken,
   createUser
 };
