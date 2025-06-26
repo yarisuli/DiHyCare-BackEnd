@@ -16,6 +16,15 @@ const getUser = async (id: number): Promise<User | null> => {
   });
 };
 
+//get un usuario por token
+const getUserByToken = async (token: string): Promise<User | null> => {
+  return prisma.user.findUnique({
+    where: {
+      token: token
+    }
+  });
+};
+
 //crear un usuario
 const createUser = async (user: Omit<User, 'id'>): Promise<User> => {
   const { email, password, name, surname, age, sex, weight, height } = user;
