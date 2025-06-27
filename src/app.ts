@@ -9,6 +9,8 @@ const app = express();
 //IMPORT ROUTERS
 import userRouter from './routes/user.router';
 import dataRouter from './routes/data.router';
+import xdripRouter from './routes/xdrip.router';
+import consola from 'consola';
 
 // CORS configuration
 app.use(
@@ -26,6 +28,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 if (process.env.LOG_REQUEST_RESPONSE === 'true') {
+consola.info(
+  'Morgan Body logging is enabled. Request and response data will be logged.'
+);
   //Morgan Body log request and response data
   app.use(bodyParser.json());
 
@@ -44,6 +49,9 @@ app.use('/user', userRouter);
 //DATA
 app.use('/data', dataRouter);
 
+//XDRIP
+app.use('/xdrip/v1', xdripRouter);
+
 // Health check endpoint
 app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({
@@ -54,10 +62,9 @@ app.get('/health', (req: Request, res: Response) => {
   });
 });
 
-// 404
-// Routes
-// app.get("/", (req, res) => {
-//   res.send("Secure Express Server");
+// Catch 404 and forward to error handler
+// app.use((req, res, next) => {
+//   res.status(404).send('Sorry, that endpoint does not exist.');
 // });
 
 app.get('/', (_, res) => {
