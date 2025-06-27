@@ -4,9 +4,11 @@ import { EntryUpload } from "../types/generalTypes";
 import prisma from "../utils/prisma.server";
 
 const createEntries = async (
+  userId: number,
   entries: EntryUpload[],
 ): Promise<Prisma.BatchPayload> => {
-  const entryArray = await Promise.all(entries.map(async (entry, idx) => {
+  const normalizedEntries = Array.isArray(entries) ? entries : [entries];
+  const entryArray = normalizedEntries.map((entry, idx) => {
     const {
       device,
       type,
@@ -35,19 +37,14 @@ const createEntries = async (
     //   noise: noise,
     // };
 
-  
-    // You need to pass 'token' as a parameter to this function or get it from context
-     const token = "3f509aca-4521-42f7-b621-7ad59db58cd1";
-    const userObj = await user.getUserByToken(token);
-    
 
       return {
       // device: device,
       dataType: DataType.GLUCOSE,
-      createAt: new Date(dateString),
+      createdAt: new Date(dateString),
   //    mbg: mbg,
       value: sgv,
-      userId: userObj?.id?? 56, // Assuming userObj has an id property
+      userId: userId,
       // delta: delta,
       // direction: direction,
       // filtered: filtered,
@@ -56,7 +53,7 @@ const createEntries = async (
       // noise: noise,
     };
 
-  }));
+  });
   return prisma.data.createMany({
     data: entryArray,
     skipDuplicates: true,
