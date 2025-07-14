@@ -27,18 +27,18 @@ const getEventById = async (req: Request, res: Response) => {
 };
 // get eventos de usuario
 const getEventByUser = async (req: Request, res: Response) => {
-    const userId: number = req.body.userId;
-    
-    try {
-        const events = await calendarService.getEventByUser(userId);
-        if (events.length === 0) {
-            return res.status(404).json({ error: 'Could not get this users events.' });
-        }
-        return res.status(200).json(events);
-    } catch (error: any) {
-        return res.status(500).json({ error: error.message });
+  const userId: number = req.body.userId;
+
+  try {
+    const event = await calendarService.getEventByUser(userId);
+    if (event) {
+      return res.status(200).json(event);
     }
-}
+    return res.status(404).json({ error: 'Event from user not found.' });
+  } catch (error: any) {
+    return res.status(500).json({ error: error.message });
+  }
+};
 
 //get eventos del usuario por tipo
 const getEventByType = async (req: Request, res: Response) => {
