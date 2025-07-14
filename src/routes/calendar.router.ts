@@ -11,4 +11,4 @@ router.post('', calendarController.createEvent);
 router.put('/:id', calendarController.updateEvent);
 router.delete('/:id', calendarController.deleteEvent);
 
-export default router;
+export default router; 
