@@ -25,6 +25,7 @@ const getEventById = async (req: Request, res: Response) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
 // get eventos de usuario
 const getEventByUser = async (req: Request, res: Response) => {
   const userId: number = req.body.userId;
@@ -82,6 +83,7 @@ const updateEvent = async (req: Request, res: Response) => {
     });
   }
 };
+
 //delete evento
 const deleteEvent = async (req: Request, res: Response) => {
   try {
