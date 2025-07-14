@@ -18,7 +18,7 @@ const getUserData = async (userId: number): Promise<Data[]> => {
 //get toda data de un tipo especifico de un usuario 
 import { DataType } from '../generated/prisma';
 
-const getUserDataType = async (userId: number, dataType: string): Promise<Data[]> => {
+const getUserDataByType = async (userId: number, dataType: string): Promise<Data[]> => {
   return prisma.data.findMany({
     where: {
       userId: userId,
@@ -66,7 +66,7 @@ const deleteData = async (id: number): Promise<void> => {
 export default {
   getAllData,
   getUserData,
-  getUserDataType,
+  getUserDataByType,
   createData,
   updateData,
   deleteData
