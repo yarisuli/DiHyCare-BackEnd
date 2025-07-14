@@ -76,7 +76,9 @@ app.get('/', (_, res) => {
 });
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  consola.error('Unhandled error:', err);
   res.status(500).json({ error: 'Internal Server Error' });
 });
+
 
 export default app;
