@@ -10,26 +10,29 @@ const getAllData = async (): Promise<Data[]> => {
 const getUserData = async (userId: number): Promise<Data[]> => {
   return prisma.data.findMany({
     where: {
-      userId: userId,
+      userId: userId
     }
   });
 };
 
-//get toda data de un tipo especifico de un usuario 
+//get toda data de un tipo especifico de un usuario
 import { DataType } from '../generated/prisma';
 
-const getUserDataByType = async (userId: number, dataType: string): Promise<Data[]> => {
+const getUserDataByType = async (
+  userId: number,
+  dataType: string
+): Promise<Data[]> => {
   return prisma.data.findMany({
     where: {
       userId: userId,
-      dataType: dataType as DataType,
+      dataType: dataType as DataType
     }
   });
 };
 
 //crear data de un usuario
 const createData = async (data: Omit<Data, 'id'>): Promise<Data> => {
-  const { dataType, value, description, userId} = data;
+  const { dataType, value, description, userId } = data;
   return prisma.data.create({
     data: {
       dataType,
@@ -40,11 +43,14 @@ const createData = async (data: Omit<Data, 'id'>): Promise<Data> => {
   });
 };
 
-const updateData = async (data: Omit<Data, 'id'>, id: number): Promise<Data> => {
+const updateData = async (
+  data: Omit<Data, 'id'>,
+  id: number
+): Promise<Data> => {
   const { dataType, value, description, userId } = data;
   return prisma.data.update({
     where: {
-      id: id,
+      id: id
     },
     data: {
       dataType,
@@ -58,7 +64,7 @@ const updateData = async (data: Omit<Data, 'id'>, id: number): Promise<Data> => 
 const deleteData = async (id: number): Promise<void> => {
   await prisma.data.delete({
     where: {
-      id: id,
+      id: id
     }
   });
 };

@@ -15,7 +15,7 @@ export type EntryUpload = {
 };
 
 export type Entry = {
-//   id: number;
+  //   id: number;
   device: string;
   type: string;
   date: Date;
@@ -27,6 +27,6 @@ export type Entry = {
   unfiltered: number;
   rssi: number;
   noise: number;
-//   updatedAt: Date;
+  //   updatedAt: Date;
   userId: number;
 };

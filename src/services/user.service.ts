@@ -45,25 +45,35 @@ const createUser = async (user: Omit<User, 'id'>): Promise<User> => {
 
 //actualizar un usuario
 const updateUser = async (
-  user: Omit<User, "id">,
-  id: number,
+  user: Omit<User, 'id'>,
+  id: number
 ): Promise<User> => {
-  const { email, password, name, surname, age, sex, weight, height, updatedAt} = user;
+  const {
+    email,
+    password,
+    name,
+    surname,
+    age,
+    sex,
+    weight,
+    height,
+    updatedAt
+  } = user;
   return prisma.user.update({
     where: {
-      id: id,
+      id: id
     },
     data: {
-      email, 
-      password, 
-      name, 
-      surname, 
-      age, 
-      sex, 
-      weight, 
-      height, 
+      email,
+      password,
+      name,
+      surname,
+      age,
+      sex,
+      weight,
+      height,
       updatedAt
-    },
+    }
   });
 };
 
@@ -71,8 +81,8 @@ const updateUser = async (
 const deleteUser = async (id: number): Promise<void> => {
   await prisma.user.delete({
     where: {
-      id,
-    },
+      id
+    }
   });
 };
 

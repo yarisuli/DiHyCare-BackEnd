@@ -29,9 +29,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 if (process.env.LOG_REQUEST_RESPONSE === 'true') {
-consola.info(
-  'Morgan Body logging is enabled. Request and response data will be logged.'
-);
+  consola.info(
+    'Morgan Body logging is enabled. Request and response data will be logged.'
+  );
   //Morgan Body log request and response data
   app.use(bodyParser.json());
 
@@ -79,6 +79,5 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   consola.error('Unhandled error:', err);
   res.status(500).json({ error: 'Internal Server Error' });
 });
-
 
 export default app;

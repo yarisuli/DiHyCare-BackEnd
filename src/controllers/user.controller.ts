@@ -41,13 +41,13 @@ const createUser = async (req: Request, res: Response) => {
 //Actualizar un usuario
 const updateUser = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params["id"]);
+    const id = parseInt(req.params['id']);
     await userService.updateUser(req.body, id);
-    res.send("User updated succesfully.");
+    res.send('User updated succesfully.');
   } catch (error: any) {
     return res.status(500).json({
-      message: "Error at updating user.",
-      error: error.message,
+      message: 'Error at updating user.',
+      error: error.message
     });
   }
 };
@@ -55,13 +55,13 @@ const updateUser = async (req: Request, res: Response) => {
 //Eliminar un usuario
 const deleteUser = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params["id"]);
+    const id = parseInt(req.params['id']);
     await userService.deleteUser(id);
-    res.send("User deleted successfully.");
+    res.send('User deleted successfully.');
   } catch (error: any) {
     return res.status(500).json({
-      message: "Error at deleting user.",
-      error: error.message,
+      message: 'Error at deleting user.',
+      error: error.message
     });
   }
 };

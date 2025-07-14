@@ -10,16 +10,16 @@ const getEvents = async (): Promise<Calendar[]> => {
 const getEventById = async (id: number): Promise<Calendar | null> => {
   return prisma.calendar.findUnique({
     where: {
-      id: id,
-    },
+      id: id
+    }
   });
-}
+};
 
 // get eventos de usuario
 const getEventByUser = async (userId: number): Promise<Calendar[]> => {
   return prisma.calendar.findMany({
     where: {
-      userId: userId,
+      userId: userId
     }
   });
 };
@@ -27,11 +27,14 @@ const getEventByUser = async (userId: number): Promise<Calendar[]> => {
 // get eventos de usuario por tipo
 import { EventType } from '../generated/prisma';
 
-const getEventByType = async (userId: number, eventType: string): Promise<Calendar[]> => {
+const getEventByType = async (
+  userId: number,
+  eventType: string
+): Promise<Calendar[]> => {
   return prisma.calendar.findMany({
     where: {
       userId: userId,
-      type: eventType as EventType,
+      type: eventType as EventType
     }
   });
 };
@@ -51,11 +54,14 @@ const createEvent = async (event: Omit<Calendar, 'id'>): Promise<Calendar> => {
 };
 
 //update evento
-const updateEvent = async (event: Omit<Calendar, 'id'>, id: number): Promise<Calendar> => {
+const updateEvent = async (
+  event: Omit<Calendar, 'id'>,
+  id: number
+): Promise<Calendar> => {
   const { event: eventName, description, date, type, userId } = event;
   return prisma.calendar.update({
     where: {
-      id: id,
+      id: id
     },
     data: {
       event: eventName,
@@ -71,7 +77,7 @@ const updateEvent = async (event: Omit<Calendar, 'id'>, id: number): Promise<Cal
 const deleteEvent = async (id: number): Promise<void> => {
   await prisma.calendar.delete({
     where: {
-      id: id,
+      id: id
     }
   });
 };
@@ -84,4 +90,4 @@ export default {
   createEvent,
   updateEvent,
   deleteEvent
-}
+};

@@ -1,11 +1,11 @@
-import user from "../services/user.service";
-import { DataType, Prisma } from "../generated/prisma/client";
-import { EntryUpload } from "../types/generalTypes";
-import prisma from "../utils/prisma.server";
+import user from '../services/user.service';
+import { DataType, Prisma } from '../generated/prisma/client';
+import { EntryUpload } from '../types/generalTypes';
+import prisma from '../utils/prisma.server';
 
 const createEntries = async (
   userId: number,
-  entries: EntryUpload[],
+  entries: EntryUpload[]
 ): Promise<Prisma.BatchPayload> => {
   const normalizedEntries = Array.isArray(entries) ? entries : [entries];
   const entryArray = normalizedEntries.map((entry, idx) => {
@@ -20,7 +20,7 @@ const createEntries = async (
       filtered,
       unfiltered,
       rssi,
-      noise,
+      noise
     } = entry;
 
     // return {
@@ -37,14 +37,13 @@ const createEntries = async (
     //   noise: noise,
     // };
 
-
-      return {
+    return {
       // device: device,
       dataType: DataType.GLUCOSE,
       createdAt: new Date(dateString),
-  //    mbg: mbg,
+      //    mbg: mbg,
       value: sgv,
-      userId: userId,
+      userId: userId
       // delta: delta,
       // direction: direction,
       // filtered: filtered,
@@ -52,14 +51,13 @@ const createEntries = async (
       // rssi: rssi,
       // noise: noise,
     };
-
   });
   return prisma.data.createMany({
     data: entryArray,
-    skipDuplicates: true,
+    skipDuplicates: true
   });
 };
 
 export default {
-  createEntries,
+  createEntries
 };
