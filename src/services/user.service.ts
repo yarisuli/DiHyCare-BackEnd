@@ -1,7 +1,7 @@
 import { get } from 'http';
 import { User } from '../generated/prisma';
-// import { Author } from "../types/generalTypes";
 import prisma from '../utils/prisma.server';
+// import { Author } from "../types/generalTypes";
 
 //get todos los usuarios
 const getUsers = async (): Promise<User[]> => {
@@ -43,33 +43,44 @@ const createUser = async (user: Omit<User, 'id'>): Promise<User> => {
   });
 };
 
-// const updateAuthor = async (
-//   author: Omit<Author, "id">,
-//   id: number,
-// ): Promise<Author> => {
-//   const { firstName, lastName } = author;
-//   return prisma.author.update({
-//     where: {
-//       id: id,
-//     },
-//     data: {
-//       firstName,
-//       lastName,
-//     },
-//   });
-// };
+//actualizar un usuario
+const updateUser = async (
+  user: Omit<User, "id">,
+  id: number,
+): Promise<User> => {
+  const { email, password, name, surname, age, sex, weight, height, updatedAt} = user;
+  return prisma.user.update({
+    where: {
+      id: id,
+    },
+    data: {
+      email, 
+      password, 
+      name, 
+      surname, 
+      age, 
+      sex, 
+      weight, 
+      height, 
+      updatedAt
+    },
+  });
+};
 
-// const deleteAuthor = async (id: number): Promise<void> => {
-//   await prisma.author.delete({
-//     where: {
-//       id,
-//     },
-//   });
-// };
+//eliminar un usuario
+const deleteUser = async (id: number): Promise<void> => {
+  await prisma.user.delete({
+    where: {
+      id,
+    },
+  });
+};
 
 export default {
   getUsers,
   getUser,
   getUserByToken,
-  createUser
+  createUser,
+  updateUser,
+  deleteUser
 };
