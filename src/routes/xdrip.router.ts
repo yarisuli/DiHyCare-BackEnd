@@ -5,6 +5,7 @@ import { Router } from 'express';
 const router = Router();
 
 router.post('/entries', xdripController.createEntries);
+
 // router.post("/treatments", entryController.createEntries);
 // router.post("/entries/devicestatus", entryController.createEntries);
 
