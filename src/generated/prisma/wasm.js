@@ -157,6 +157,16 @@ exports.Prisma.DataScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.CalendarScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  date: 'date',
+  type: 'type',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -187,11 +197,20 @@ exports.DataType = exports.$Enums.DataType = {
   HEART_RATE: 'HEART_RATE'
 };
 
+exports.Type = exports.$Enums.Type = {
+  DIABETES: 'DIABETES',
+  HYPERTENSION: 'HYPERTENSION',
+  EXERCISE: 'EXERCISE',
+  MEDICATION: 'MEDICATION',
+  OTHER: 'OTHER'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Disease: 'Disease',
   UserDisease: 'UserDisease',
-  Data: 'Data'
+  Data: 'Data',
+  Calendar: 'Calendar'
 };
 
 /**
