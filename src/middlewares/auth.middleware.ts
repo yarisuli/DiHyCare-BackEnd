@@ -8,19 +8,19 @@ export const verifyToken = async (
 ) => {
   try {
     if (!req.headers.authorization)
-      return res.status(401).json({ message: "No puede acceder." });
+      return res.status(401).json({ message: "Does not have access." });
 
     const token = req.headers.authorization.split(" ")[1] as string;
 
     if (!token)
-      return res.status(400).json({ message: "Formato invalido de token." });
+      return res.status(400).json({ message: "Invalid token." });
 
     const payload = jwt.verify(token, "secret") as jwt.JwtPayload;
 
     if (!payload.id)
       return res
         .status(400)
-        .json({ message: "El token no contiene un ID de usuario." });
+        .json({ message: "Token does not contain id." });
 
     req.params["id"] = payload.id;
 

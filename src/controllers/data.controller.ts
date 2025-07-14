@@ -62,7 +62,7 @@ const updateData = async (req: Request, res: Response) => {
     return res.status(200).json(updatedData);
   } catch (error: any) {
     return res.status(500).json({
-      message: "Error al actualizar los datos.",
+      message: "Error at updating data.",
       error: error.message,
     });
   }
