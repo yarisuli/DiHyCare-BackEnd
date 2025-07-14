@@ -32,6 +32,7 @@ model User {
   @@map("users")
   UserDisease UserDisease[]
   Data Data[]
+  Calendar Calendar[]
 }
 
 enum Sex {
@@ -87,16 +88,20 @@ enum DataType {
 
 model Calendar {
   id Int @id @default(autoincrement())
-  title String
+  event String
   description String?
   date DateTime
-  type Type
+  type EventType
+  user User @relation(fields: [userId], references: [id])
+  userId Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@map("calendar")
+
 }
 
-enum Type {
+enum EventType {
   DIABETES
   HYPERTENSION
   EXERCISE

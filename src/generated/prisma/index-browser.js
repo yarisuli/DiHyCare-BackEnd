@@ -159,10 +159,11 @@ exports.Prisma.DataScalarFieldEnum = {
 
 exports.Prisma.CalendarScalarFieldEnum = {
   id: 'id',
-  title: 'title',
+  event: 'event',
   description: 'description',
   date: 'date',
   type: 'type',
+  userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -197,7 +198,7 @@ exports.DataType = exports.$Enums.DataType = {
   HEART_RATE: 'HEART_RATE'
 };
 
-exports.Type = exports.$Enums.Type = {
+exports.EventType = exports.$Enums.EventType = {
   DIABETES: 'DIABETES',
   HYPERTENSION: 'HYPERTENSION',
   EXERCISE: 'EXERCISE',

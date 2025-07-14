@@ -28,12 +28,12 @@ const getUserData = async (req: Request, res: Response) => {
 };
 
 //get data de un tipo especifico de un usuario
-const getUserDataType = async (req: Request, res: Response) => {
+const getUserDataByType = async (req: Request, res: Response) => {
   const userId: number = req.body.userId;
   const dataType: string = req.body.dataType;
 
   try {
-    const userData = await dataService.getUserDataType(userId, dataType);
+    const userData = await dataService.getUserDataByType(userId, dataType);
     if (userData) {
       return res.status(200).json(userData);
     }
@@ -85,7 +85,7 @@ const deleteData = async (req: Request, res: Response) => {
 const user = {
   getAllData,
   getUserData,
-  getUserDataType,
+  getUserDataByType,
   createData,
   updateData,
   deleteData

@@ -9,6 +9,7 @@ const app = express();
 //IMPORT ROUTERS
 import userRouter from './routes/user.router';
 import dataRouter from './routes/data.router';
+import calendarRouter from './routes/calendar.router';
 import xdripRouter from './routes/xdrip.router';
 import consola from 'consola';
 
@@ -48,6 +49,9 @@ app.use('/user', userRouter);
 
 //DATA
 app.use('/data', dataRouter);
+
+//CALENDAR
+app.use('/calendar', calendarRouter);
 
 //XDRIP
 app.use('/xdrip/v1', xdripRouter);

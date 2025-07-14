@@ -65,7 +65,7 @@ export const DataType: {
 export type DataType = (typeof DataType)[keyof typeof DataType]
 
 
-export const Type: {
+export const EventType: {
   DIABETES: 'DIABETES',
   HYPERTENSION: 'HYPERTENSION',
   EXERCISE: 'EXERCISE',
@@ -73,7 +73,7 @@ export const Type: {
   OTHER: 'OTHER'
 };
 
-export type Type = (typeof Type)[keyof typeof Type]
+export type EventType = (typeof EventType)[keyof typeof EventType]
 
 }
 
@@ -85,9 +85,9 @@ export type DataType = $Enums.DataType
 
 export const DataType: typeof $Enums.DataType
 
-export type Type = $Enums.Type
+export type EventType = $Enums.EventType
 
-export const Type: typeof $Enums.Type
+export const EventType: typeof $Enums.EventType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1285,11 +1285,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     UserDisease: number
     Data: number
+    Calendar: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     UserDisease?: boolean | UserCountOutputTypeCountUserDiseaseArgs
     Data?: boolean | UserCountOutputTypeCountDataArgs
+    Calendar?: boolean | UserCountOutputTypeCountCalendarArgs
   }
 
   // Custom InputTypes
@@ -1315,6 +1317,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountDataArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DataWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCalendarArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CalendarWhereInput
   }
 
 
@@ -1621,6 +1630,7 @@ export namespace Prisma {
     updatedAt?: boolean
     UserDisease?: boolean | User$UserDiseaseArgs<ExtArgs>
     Data?: boolean | User$DataArgs<ExtArgs>
+    Calendar?: boolean | User$CalendarArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1673,6 +1683,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     UserDisease?: boolean | User$UserDiseaseArgs<ExtArgs>
     Data?: boolean | User$DataArgs<ExtArgs>
+    Calendar?: boolean | User$CalendarArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1683,6 +1694,7 @@ export namespace Prisma {
     objects: {
       UserDisease: Prisma.$UserDiseasePayload<ExtArgs>[]
       Data: Prisma.$DataPayload<ExtArgs>[]
+      Calendar: Prisma.$CalendarPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2093,6 +2105,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     UserDisease<T extends User$UserDiseaseArgs<ExtArgs> = {}>(args?: Subset<T, User$UserDiseaseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDiseasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Data<T extends User$DataArgs<ExtArgs> = {}>(args?: Subset<T, User$DataArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Calendar<T extends User$CalendarArgs<ExtArgs> = {}>(args?: Subset<T, User$CalendarArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CalendarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2567,6 +2580,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DataScalarFieldEnum | DataScalarFieldEnum[]
+  }
+
+  /**
+   * User.Calendar
+   */
+  export type User$CalendarArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Calendar
+     */
+    select?: CalendarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Calendar
+     */
+    omit?: CalendarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CalendarInclude<ExtArgs> | null
+    where?: CalendarWhereInput
+    orderBy?: CalendarOrderByWithRelationInput | CalendarOrderByWithRelationInput[]
+    cursor?: CalendarWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CalendarScalarFieldEnum | CalendarScalarFieldEnum[]
   }
 
   /**
@@ -5884,38 +5921,43 @@ export namespace Prisma {
 
   export type CalendarAvgAggregateOutputType = {
     id: number | null
+    userId: number | null
   }
 
   export type CalendarSumAggregateOutputType = {
     id: number | null
+    userId: number | null
   }
 
   export type CalendarMinAggregateOutputType = {
     id: number | null
-    title: string | null
+    event: string | null
     description: string | null
     date: Date | null
-    type: $Enums.Type | null
+    type: $Enums.EventType | null
+    userId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type CalendarMaxAggregateOutputType = {
     id: number | null
-    title: string | null
+    event: string | null
     description: string | null
     date: Date | null
-    type: $Enums.Type | null
+    type: $Enums.EventType | null
+    userId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type CalendarCountAggregateOutputType = {
     id: number
-    title: number
+    event: number
     description: number
     date: number
     type: number
+    userId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5924,38 +5966,43 @@ export namespace Prisma {
 
   export type CalendarAvgAggregateInputType = {
     id?: true
+    userId?: true
   }
 
   export type CalendarSumAggregateInputType = {
     id?: true
+    userId?: true
   }
 
   export type CalendarMinAggregateInputType = {
     id?: true
-    title?: true
+    event?: true
     description?: true
     date?: true
     type?: true
+    userId?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type CalendarMaxAggregateInputType = {
     id?: true
-    title?: true
+    event?: true
     description?: true
     date?: true
     type?: true
+    userId?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type CalendarCountAggregateInputType = {
     id?: true
-    title?: true
+    event?: true
     description?: true
     date?: true
     type?: true
+    userId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6049,10 +6096,11 @@ export namespace Prisma {
 
   export type CalendarGroupByOutputType = {
     id: number
-    title: string
+    event: string
     description: string | null
     date: Date
-    type: $Enums.Type
+    type: $Enums.EventType
+    userId: number
     createdAt: Date
     updatedAt: Date
     _count: CalendarCountAggregateOutputType | null
@@ -6078,55 +6126,74 @@ export namespace Prisma {
 
   export type CalendarSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    title?: boolean
+    event?: boolean
     description?: boolean
     date?: boolean
     type?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["calendar"]>
 
   export type CalendarSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    title?: boolean
+    event?: boolean
     description?: boolean
     date?: boolean
     type?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["calendar"]>
 
   export type CalendarSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    title?: boolean
+    event?: boolean
     description?: boolean
     date?: boolean
     type?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["calendar"]>
 
   export type CalendarSelectScalar = {
     id?: boolean
-    title?: boolean
+    event?: boolean
     description?: boolean
     date?: boolean
     type?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CalendarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "date" | "type" | "createdAt" | "updatedAt", ExtArgs["result"]["calendar"]>
+  export type CalendarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "event" | "description" | "date" | "type" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["calendar"]>
+  export type CalendarInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CalendarIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CalendarIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $CalendarPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Calendar"
-    objects: {}
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      title: string
+      event: string
       description: string | null
       date: Date
-      type: $Enums.Type
+      type: $Enums.EventType
+      userId: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["calendar"]>
@@ -6523,6 +6590,7 @@ export namespace Prisma {
    */
   export interface Prisma__CalendarClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6553,10 +6621,11 @@ export namespace Prisma {
    */
   interface CalendarFieldRefs {
     readonly id: FieldRef<"Calendar", 'Int'>
-    readonly title: FieldRef<"Calendar", 'String'>
+    readonly event: FieldRef<"Calendar", 'String'>
     readonly description: FieldRef<"Calendar", 'String'>
     readonly date: FieldRef<"Calendar", 'DateTime'>
-    readonly type: FieldRef<"Calendar", 'Type'>
+    readonly type: FieldRef<"Calendar", 'EventType'>
+    readonly userId: FieldRef<"Calendar", 'Int'>
     readonly createdAt: FieldRef<"Calendar", 'DateTime'>
     readonly updatedAt: FieldRef<"Calendar", 'DateTime'>
   }
@@ -6576,6 +6645,10 @@ export namespace Prisma {
      */
     omit?: CalendarOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CalendarInclude<ExtArgs> | null
+    /**
      * Filter, which Calendar to fetch.
      */
     where: CalendarWhereUniqueInput
@@ -6594,6 +6667,10 @@ export namespace Prisma {
      */
     omit?: CalendarOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CalendarInclude<ExtArgs> | null
+    /**
      * Filter, which Calendar to fetch.
      */
     where: CalendarWhereUniqueInput
@@ -6611,6 +6688,10 @@ export namespace Prisma {
      * Omit specific fields from the Calendar
      */
     omit?: CalendarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CalendarInclude<ExtArgs> | null
     /**
      * Filter, which Calendar to fetch.
      */
@@ -6660,6 +6741,10 @@ export namespace Prisma {
      */
     omit?: CalendarOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CalendarInclude<ExtArgs> | null
+    /**
      * Filter, which Calendar to fetch.
      */
     where?: CalendarWhereInput
@@ -6708,6 +6793,10 @@ export namespace Prisma {
      */
     omit?: CalendarOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CalendarInclude<ExtArgs> | null
+    /**
      * Filter, which Calendars to fetch.
      */
     where?: CalendarWhereInput
@@ -6751,6 +6840,10 @@ export namespace Prisma {
      */
     omit?: CalendarOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CalendarInclude<ExtArgs> | null
+    /**
      * The data needed to create a Calendar.
      */
     data: XOR<CalendarCreateInput, CalendarUncheckedCreateInput>
@@ -6784,6 +6877,10 @@ export namespace Prisma {
      */
     data: CalendarCreateManyInput | CalendarCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CalendarIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6798,6 +6895,10 @@ export namespace Prisma {
      * Omit specific fields from the Calendar
      */
     omit?: CalendarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CalendarInclude<ExtArgs> | null
     /**
      * The data needed to update a Calendar.
      */
@@ -6850,6 +6951,10 @@ export namespace Prisma {
      * Limit how many Calendars to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CalendarIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6864,6 +6969,10 @@ export namespace Prisma {
      * Omit specific fields from the Calendar
      */
     omit?: CalendarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CalendarInclude<ExtArgs> | null
     /**
      * The filter to search for the Calendar to update in case it exists.
      */
@@ -6890,6 +6999,10 @@ export namespace Prisma {
      * Omit specific fields from the Calendar
      */
     omit?: CalendarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CalendarInclude<ExtArgs> | null
     /**
      * Filter which Calendar to delete.
      */
@@ -6922,6 +7035,10 @@ export namespace Prisma {
      * Omit specific fields from the Calendar
      */
     omit?: CalendarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CalendarInclude<ExtArgs> | null
   }
 
 
@@ -6990,10 +7107,11 @@ export namespace Prisma {
 
   export const CalendarScalarFieldEnum: {
     id: 'id',
-    title: 'title',
+    event: 'event',
     description: 'description',
     date: 'date',
     type: 'type',
+    userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -7115,16 +7233,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Type'
+   * Reference to a field of type 'EventType'
    */
-  export type EnumTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Type'>
+  export type EnumEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventType'>
     
 
 
   /**
-   * Reference to a field of type 'Type[]'
+   * Reference to a field of type 'EventType[]'
    */
-  export type ListEnumTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Type[]'>
+  export type ListEnumEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventType[]'>
     
   /**
    * Deep Input Types
@@ -7149,6 +7267,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     UserDisease?: UserDiseaseListRelationFilter
     Data?: DataListRelationFilter
+    Calendar?: CalendarListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -7166,6 +7285,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     UserDisease?: UserDiseaseOrderByRelationAggregateInput
     Data?: DataOrderByRelationAggregateInput
+    Calendar?: CalendarOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -7186,6 +7306,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     UserDisease?: UserDiseaseListRelationFilter
     Data?: DataListRelationFilter
+    Calendar?: CalendarListRelationFilter
   }, "id" | "email" | "token">
 
   export type UserOrderByWithAggregationInput = {
@@ -7396,22 +7517,26 @@ export namespace Prisma {
     OR?: CalendarWhereInput[]
     NOT?: CalendarWhereInput | CalendarWhereInput[]
     id?: IntFilter<"Calendar"> | number
-    title?: StringFilter<"Calendar"> | string
+    event?: StringFilter<"Calendar"> | string
     description?: StringNullableFilter<"Calendar"> | string | null
     date?: DateTimeFilter<"Calendar"> | Date | string
-    type?: EnumTypeFilter<"Calendar"> | $Enums.Type
+    type?: EnumEventTypeFilter<"Calendar"> | $Enums.EventType
+    userId?: IntFilter<"Calendar"> | number
     createdAt?: DateTimeFilter<"Calendar"> | Date | string
     updatedAt?: DateTimeFilter<"Calendar"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type CalendarOrderByWithRelationInput = {
     id?: SortOrder
-    title?: SortOrder
+    event?: SortOrder
     description?: SortOrderInput | SortOrder
     date?: SortOrder
     type?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
   }
 
   export type CalendarWhereUniqueInput = Prisma.AtLeast<{
@@ -7419,20 +7544,23 @@ export namespace Prisma {
     AND?: CalendarWhereInput | CalendarWhereInput[]
     OR?: CalendarWhereInput[]
     NOT?: CalendarWhereInput | CalendarWhereInput[]
-    title?: StringFilter<"Calendar"> | string
+    event?: StringFilter<"Calendar"> | string
     description?: StringNullableFilter<"Calendar"> | string | null
     date?: DateTimeFilter<"Calendar"> | Date | string
-    type?: EnumTypeFilter<"Calendar"> | $Enums.Type
+    type?: EnumEventTypeFilter<"Calendar"> | $Enums.EventType
+    userId?: IntFilter<"Calendar"> | number
     createdAt?: DateTimeFilter<"Calendar"> | Date | string
     updatedAt?: DateTimeFilter<"Calendar"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type CalendarOrderByWithAggregationInput = {
     id?: SortOrder
-    title?: SortOrder
+    event?: SortOrder
     description?: SortOrderInput | SortOrder
     date?: SortOrder
     type?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CalendarCountOrderByAggregateInput
@@ -7447,10 +7575,11 @@ export namespace Prisma {
     OR?: CalendarScalarWhereWithAggregatesInput[]
     NOT?: CalendarScalarWhereWithAggregatesInput | CalendarScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Calendar"> | number
-    title?: StringWithAggregatesFilter<"Calendar"> | string
+    event?: StringWithAggregatesFilter<"Calendar"> | string
     description?: StringNullableWithAggregatesFilter<"Calendar"> | string | null
     date?: DateTimeWithAggregatesFilter<"Calendar"> | Date | string
-    type?: EnumTypeWithAggregatesFilter<"Calendar"> | $Enums.Type
+    type?: EnumEventTypeWithAggregatesFilter<"Calendar"> | $Enums.EventType
+    userId?: IntWithAggregatesFilter<"Calendar"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Calendar"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Calendar"> | Date | string
   }
@@ -7469,6 +7598,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     UserDisease?: UserDiseaseCreateNestedManyWithoutUserInput
     Data?: DataCreateNestedManyWithoutUserInput
+    Calendar?: CalendarCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7486,6 +7616,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     UserDisease?: UserDiseaseUncheckedCreateNestedManyWithoutUserInput
     Data?: DataUncheckedCreateNestedManyWithoutUserInput
+    Calendar?: CalendarUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -7502,6 +7633,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UserDisease?: UserDiseaseUpdateManyWithoutUserNestedInput
     Data?: DataUpdateManyWithoutUserNestedInput
+    Calendar?: CalendarUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -7519,6 +7651,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UserDisease?: UserDiseaseUncheckedUpdateManyWithoutUserNestedInput
     Data?: DataUncheckedUpdateManyWithoutUserNestedInput
+    Calendar?: CalendarUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -7715,68 +7848,74 @@ export namespace Prisma {
   }
 
   export type CalendarCreateInput = {
-    title: string
+    event: string
     description?: string | null
     date: Date | string
-    type: $Enums.Type
+    type: $Enums.EventType
     createdAt?: Date | string
     updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutCalendarInput
   }
 
   export type CalendarUncheckedCreateInput = {
     id?: number
-    title: string
+    event: string
     description?: string | null
     date: Date | string
-    type: $Enums.Type
+    type: $Enums.EventType
+    userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type CalendarUpdateInput = {
-    title?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
+    type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCalendarNestedInput
   }
 
   export type CalendarUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
+    type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
+    userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CalendarCreateManyInput = {
     id?: number
-    title: string
+    event: string
     description?: string | null
     date: Date | string
-    type: $Enums.Type
+    type: $Enums.EventType
+    userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type CalendarUpdateManyMutationInput = {
-    title?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
+    type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CalendarUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
+    type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
+    userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7852,6 +7991,12 @@ export namespace Prisma {
     none?: DataWhereInput
   }
 
+  export type CalendarListRelationFilter = {
+    every?: CalendarWhereInput
+    some?: CalendarWhereInput
+    none?: CalendarWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -7862,6 +8007,10 @@ export namespace Prisma {
   }
 
   export type DataOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CalendarOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8155,59 +8304,64 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type EnumTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.Type | EnumTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeFilter<$PrismaModel> | $Enums.Type
+  export type EnumEventTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.EventType | EnumEventTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EventType[] | ListEnumEventTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EventType[] | ListEnumEventTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumEventTypeFilter<$PrismaModel> | $Enums.EventType
   }
 
   export type CalendarCountOrderByAggregateInput = {
     id?: SortOrder
-    title?: SortOrder
+    event?: SortOrder
     description?: SortOrder
     date?: SortOrder
     type?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type CalendarAvgOrderByAggregateInput = {
     id?: SortOrder
+    userId?: SortOrder
   }
 
   export type CalendarMaxOrderByAggregateInput = {
     id?: SortOrder
-    title?: SortOrder
+    event?: SortOrder
     description?: SortOrder
     date?: SortOrder
     type?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type CalendarMinOrderByAggregateInput = {
     id?: SortOrder
-    title?: SortOrder
+    event?: SortOrder
     description?: SortOrder
     date?: SortOrder
     type?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type CalendarSumOrderByAggregateInput = {
     id?: SortOrder
+    userId?: SortOrder
   }
 
-  export type EnumTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Type | EnumTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeWithAggregatesFilter<$PrismaModel> | $Enums.Type
+  export type EnumEventTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EventType | EnumEventTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EventType[] | ListEnumEventTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EventType[] | ListEnumEventTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumEventTypeWithAggregatesFilter<$PrismaModel> | $Enums.EventType
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeFilter<$PrismaModel>
-    _max?: NestedEnumTypeFilter<$PrismaModel>
+    _min?: NestedEnumEventTypeFilter<$PrismaModel>
+    _max?: NestedEnumEventTypeFilter<$PrismaModel>
   }
 
   export type UserDiseaseCreateNestedManyWithoutUserInput = {
@@ -8224,6 +8378,13 @@ export namespace Prisma {
     connect?: DataWhereUniqueInput | DataWhereUniqueInput[]
   }
 
+  export type CalendarCreateNestedManyWithoutUserInput = {
+    create?: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput> | CalendarCreateWithoutUserInput[] | CalendarUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CalendarCreateOrConnectWithoutUserInput | CalendarCreateOrConnectWithoutUserInput[]
+    createMany?: CalendarCreateManyUserInputEnvelope
+    connect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+  }
+
   export type UserDiseaseUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserDiseaseCreateWithoutUserInput, UserDiseaseUncheckedCreateWithoutUserInput> | UserDiseaseCreateWithoutUserInput[] | UserDiseaseUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserDiseaseCreateOrConnectWithoutUserInput | UserDiseaseCreateOrConnectWithoutUserInput[]
@@ -8236,6 +8397,13 @@ export namespace Prisma {
     connectOrCreate?: DataCreateOrConnectWithoutUserInput | DataCreateOrConnectWithoutUserInput[]
     createMany?: DataCreateManyUserInputEnvelope
     connect?: DataWhereUniqueInput | DataWhereUniqueInput[]
+  }
+
+  export type CalendarUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput> | CalendarCreateWithoutUserInput[] | CalendarUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CalendarCreateOrConnectWithoutUserInput | CalendarCreateOrConnectWithoutUserInput[]
+    createMany?: CalendarCreateManyUserInputEnvelope
+    connect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8290,6 +8458,20 @@ export namespace Prisma {
     deleteMany?: DataScalarWhereInput | DataScalarWhereInput[]
   }
 
+  export type CalendarUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput> | CalendarCreateWithoutUserInput[] | CalendarUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CalendarCreateOrConnectWithoutUserInput | CalendarCreateOrConnectWithoutUserInput[]
+    upsert?: CalendarUpsertWithWhereUniqueWithoutUserInput | CalendarUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CalendarCreateManyUserInputEnvelope
+    set?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    disconnect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    delete?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    connect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    update?: CalendarUpdateWithWhereUniqueWithoutUserInput | CalendarUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CalendarUpdateManyWithWhereWithoutUserInput | CalendarUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CalendarScalarWhereInput | CalendarScalarWhereInput[]
+  }
+
   export type UserDiseaseUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserDiseaseCreateWithoutUserInput, UserDiseaseUncheckedCreateWithoutUserInput> | UserDiseaseCreateWithoutUserInput[] | UserDiseaseUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserDiseaseCreateOrConnectWithoutUserInput | UserDiseaseCreateOrConnectWithoutUserInput[]
@@ -8316,6 +8498,20 @@ export namespace Prisma {
     update?: DataUpdateWithWhereUniqueWithoutUserInput | DataUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: DataUpdateManyWithWhereWithoutUserInput | DataUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: DataScalarWhereInput | DataScalarWhereInput[]
+  }
+
+  export type CalendarUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput> | CalendarCreateWithoutUserInput[] | CalendarUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CalendarCreateOrConnectWithoutUserInput | CalendarCreateOrConnectWithoutUserInput[]
+    upsert?: CalendarUpsertWithWhereUniqueWithoutUserInput | CalendarUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CalendarCreateManyUserInputEnvelope
+    set?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    disconnect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    delete?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    connect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    update?: CalendarUpdateWithWhereUniqueWithoutUserInput | CalendarUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CalendarUpdateManyWithWhereWithoutUserInput | CalendarUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CalendarScalarWhereInput | CalendarScalarWhereInput[]
   }
 
   export type UserDiseaseCreateNestedManyWithoutDiseaseInput = {
@@ -8414,8 +8610,22 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDataInput, UserUpdateWithoutDataInput>, UserUncheckedUpdateWithoutDataInput>
   }
 
-  export type EnumTypeFieldUpdateOperationsInput = {
-    set?: $Enums.Type
+  export type UserCreateNestedOneWithoutCalendarInput = {
+    create?: XOR<UserCreateWithoutCalendarInput, UserUncheckedCreateWithoutCalendarInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCalendarInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumEventTypeFieldUpdateOperationsInput = {
+    set?: $Enums.EventType
+  }
+
+  export type UserUpdateOneRequiredWithoutCalendarNestedInput = {
+    create?: XOR<UserCreateWithoutCalendarInput, UserUncheckedCreateWithoutCalendarInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCalendarInput
+    upsert?: UserUpsertWithoutCalendarInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCalendarInput, UserUpdateWithoutCalendarInput>, UserUncheckedUpdateWithoutCalendarInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -8604,21 +8814,21 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type NestedEnumTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.Type | EnumTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeFilter<$PrismaModel> | $Enums.Type
+  export type NestedEnumEventTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.EventType | EnumEventTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EventType[] | ListEnumEventTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EventType[] | ListEnumEventTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumEventTypeFilter<$PrismaModel> | $Enums.EventType
   }
 
-  export type NestedEnumTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Type | EnumTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeWithAggregatesFilter<$PrismaModel> | $Enums.Type
+  export type NestedEnumEventTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EventType | EnumEventTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EventType[] | ListEnumEventTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EventType[] | ListEnumEventTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumEventTypeWithAggregatesFilter<$PrismaModel> | $Enums.EventType
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeFilter<$PrismaModel>
-    _max?: NestedEnumTypeFilter<$PrismaModel>
+    _min?: NestedEnumEventTypeFilter<$PrismaModel>
+    _max?: NestedEnumEventTypeFilter<$PrismaModel>
   }
 
   export type UserDiseaseCreateWithoutUserInput = {
@@ -8665,6 +8875,35 @@ export namespace Prisma {
 
   export type DataCreateManyUserInputEnvelope = {
     data: DataCreateManyUserInput | DataCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CalendarCreateWithoutUserInput = {
+    event: string
+    description?: string | null
+    date: Date | string
+    type: $Enums.EventType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CalendarUncheckedCreateWithoutUserInput = {
+    id?: number
+    event: string
+    description?: string | null
+    date: Date | string
+    type: $Enums.EventType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CalendarCreateOrConnectWithoutUserInput = {
+    where: CalendarWhereUniqueInput
+    create: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput>
+  }
+
+  export type CalendarCreateManyUserInputEnvelope = {
+    data: CalendarCreateManyUserInput | CalendarCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -8722,6 +8961,36 @@ export namespace Prisma {
     userId?: IntFilter<"Data"> | number
   }
 
+  export type CalendarUpsertWithWhereUniqueWithoutUserInput = {
+    where: CalendarWhereUniqueInput
+    update: XOR<CalendarUpdateWithoutUserInput, CalendarUncheckedUpdateWithoutUserInput>
+    create: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput>
+  }
+
+  export type CalendarUpdateWithWhereUniqueWithoutUserInput = {
+    where: CalendarWhereUniqueInput
+    data: XOR<CalendarUpdateWithoutUserInput, CalendarUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CalendarUpdateManyWithWhereWithoutUserInput = {
+    where: CalendarScalarWhereInput
+    data: XOR<CalendarUpdateManyMutationInput, CalendarUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CalendarScalarWhereInput = {
+    AND?: CalendarScalarWhereInput | CalendarScalarWhereInput[]
+    OR?: CalendarScalarWhereInput[]
+    NOT?: CalendarScalarWhereInput | CalendarScalarWhereInput[]
+    id?: IntFilter<"Calendar"> | number
+    event?: StringFilter<"Calendar"> | string
+    description?: StringNullableFilter<"Calendar"> | string | null
+    date?: DateTimeFilter<"Calendar"> | Date | string
+    type?: EnumEventTypeFilter<"Calendar"> | $Enums.EventType
+    userId?: IntFilter<"Calendar"> | number
+    createdAt?: DateTimeFilter<"Calendar"> | Date | string
+    updatedAt?: DateTimeFilter<"Calendar"> | Date | string
+  }
+
   export type UserDiseaseCreateWithoutDiseaseInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -8773,6 +9042,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Data?: DataCreateNestedManyWithoutUserInput
+    Calendar?: CalendarCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserDiseaseInput = {
@@ -8789,6 +9059,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Data?: DataUncheckedCreateNestedManyWithoutUserInput
+    Calendar?: CalendarUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserDiseaseInput = {
@@ -8836,6 +9107,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Data?: DataUpdateManyWithoutUserNestedInput
+    Calendar?: CalendarUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserDiseaseInput = {
@@ -8852,6 +9124,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Data?: DataUncheckedUpdateManyWithoutUserNestedInput
+    Calendar?: CalendarUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DiseaseUpsertWithoutUserDiseaseInput = {
@@ -8889,6 +9162,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     UserDisease?: UserDiseaseCreateNestedManyWithoutUserInput
+    Calendar?: CalendarCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDataInput = {
@@ -8905,6 +9179,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     UserDisease?: UserDiseaseUncheckedCreateNestedManyWithoutUserInput
+    Calendar?: CalendarUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDataInput = {
@@ -8936,6 +9211,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UserDisease?: UserDiseaseUpdateManyWithoutUserNestedInput
+    Calendar?: CalendarUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDataInput = {
@@ -8952,6 +9228,89 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UserDisease?: UserDiseaseUncheckedUpdateManyWithoutUserNestedInput
+    Calendar?: CalendarUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutCalendarInput = {
+    email: string
+    password: string
+    token?: string | null
+    name: string
+    surname: string
+    age: number
+    sex: $Enums.Sex
+    weight: number
+    height: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    UserDisease?: UserDiseaseCreateNestedManyWithoutUserInput
+    Data?: DataCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCalendarInput = {
+    id?: number
+    email: string
+    password: string
+    token?: string | null
+    name: string
+    surname: string
+    age: number
+    sex: $Enums.Sex
+    weight: number
+    height: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    UserDisease?: UserDiseaseUncheckedCreateNestedManyWithoutUserInput
+    Data?: DataUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCalendarInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCalendarInput, UserUncheckedCreateWithoutCalendarInput>
+  }
+
+  export type UserUpsertWithoutCalendarInput = {
+    update: XOR<UserUpdateWithoutCalendarInput, UserUncheckedUpdateWithoutCalendarInput>
+    create: XOR<UserCreateWithoutCalendarInput, UserUncheckedCreateWithoutCalendarInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCalendarInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCalendarInput, UserUncheckedUpdateWithoutCalendarInput>
+  }
+
+  export type UserUpdateWithoutCalendarInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    weight?: IntFieldUpdateOperationsInput | number
+    height?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UserDisease?: UserDiseaseUpdateManyWithoutUserNestedInput
+    Data?: DataUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCalendarInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    weight?: IntFieldUpdateOperationsInput | number
+    height?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UserDisease?: UserDiseaseUncheckedUpdateManyWithoutUserNestedInput
+    Data?: DataUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserDiseaseCreateManyUserInput = {
@@ -8966,6 +9325,16 @@ export namespace Prisma {
     value: number
     description?: string | null
     createdAt?: Date | string
+  }
+
+  export type CalendarCreateManyUserInput = {
+    id?: number
+    event: string
+    description?: string | null
+    date: Date | string
+    type: $Enums.EventType
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserDiseaseUpdateWithoutUserInput = {
@@ -9007,6 +9376,35 @@ export namespace Prisma {
     value?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CalendarUpdateWithoutUserInput = {
+    event?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CalendarUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    event?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CalendarUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    event?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserDiseaseCreateManyDiseaseInput = {
