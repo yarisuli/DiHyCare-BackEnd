@@ -43,24 +43,24 @@ const updateUser = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params["id"]);
     await userService.updateUser(req.body, id);
-    res.send("Se actualizó el usuario correctamente.");
+    res.send("User updated succesfully.");
   } catch (error: any) {
     return res.status(500).json({
-      message: "Error al actualizar el usuario.",
+      message: "Error at updating user.",
       error: error.message,
     });
   }
 };
 
 //Eliminar un usuario
-const deleteAuthor = async (req: Request, res: Response) => {
+const deleteUser = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params["id"]);
     await userService.deleteUser(id);
-    res.send("Se borró el usuario correctamente.");
+    res.send("User deleted successfully.");
   } catch (error: any) {
     return res.status(500).json({
-      message: "Error al borrar el usuario.",
+      message: "Error at deleting user.",
       error: error.message,
     });
   }
@@ -71,7 +71,7 @@ const user = {
   getUser,
   createUser,
   updateUser,
-  deleteAuthor
+  deleteUser
 };
 
 export default user;

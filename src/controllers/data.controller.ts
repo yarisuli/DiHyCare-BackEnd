@@ -54,11 +54,41 @@ const createData = async (req: Request, res: Response) => {
   }
 };
 
+//actualizar data de un usuario
+const updateData = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params["id"]);
+    const updatedData = await dataService.updateData(req.body, id);
+    return res.status(200).json(updatedData);
+  } catch (error: any) {
+    return res.status(500).json({
+      message: "Error al actualizar los datos.",
+      error: error.message,
+    });
+  }
+};
+
+//eliminar data de un usuario
+const deleteData = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params["id"]);
+    await dataService.deleteData(id);
+    return res.status(200).send("Data deleted successfully.");
+  } catch (error: any) {
+    return res.status(500).json({
+      message: "Error with deleting data.",
+      error: error.message,
+    });
+  }
+};
+
 const user = {
   getAllData,
   getUserData,
   getUserDataType,
-  createData
+  createData,
+  updateData,
+  deleteData
 };
 
 export default user;

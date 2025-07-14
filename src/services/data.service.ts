@@ -40,9 +40,35 @@ const createData = async (data: Omit<Data, 'id'>): Promise<Data> => {
   });
 };
 
+const updateData = async (data: Omit<Data, 'id'>, id: number): Promise<Data> => {
+  const { dataType, value, description, userId } = data;
+  return prisma.data.update({
+    where: {
+      id: id,
+    },
+    data: {
+      dataType,
+      value,
+      description,
+      userId // DESPUES CUANDO HAYA LOGIN HACER CON REQ.USER.ID
+    }
+  });
+};
+
+const deleteData = async (id: number): Promise<void> => {
+  await prisma.data.delete({
+    where: {
+      id: id,
+    }
+  });
+};
+
 export default {
   getAllData,
   getUserData,
   getUserDataType,
-  createData
+  createData,
+  updateData,
+  deleteData
+  
 };
