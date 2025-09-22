@@ -18,13 +18,13 @@ const getUser = async (id: number): Promise<User | null> => {
 };
 
 //get un usuario por token
-// const getUserByToken = async (token: string): Promise<User | null> => {
-//   return prisma.user.findUnique({
-//     where: {
-//       token: token
-//     }
-//   });
-// };
+const getUserByToken = async (token: string): Promise<User | null> => {
+  return prisma.user.findUnique({
+    where: {
+      token: token
+    }
+  });
+};
 
 //crear un usuario
 const createUser = async (user: Omit<User, 'id'>): Promise<User> => {
@@ -89,7 +89,7 @@ const deleteUser = async (id: number): Promise<void> => {
 export default {
   getUsers,
   getUser,
-  // getUserByToken,
+  getUserByToken,
   createUser,
   updateUser,
   deleteUser
