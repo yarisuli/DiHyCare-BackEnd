@@ -4,11 +4,11 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get('', dataController.getAllData);
-router.get('/user', dataController.getUserData);
-router.get('/type', dataController.getUserDataByType);
-router.post('', dataController.createData);
-router.put('/:id', dataController.updateData);
-router.delete('/:id', dataController.deleteData);
+router.get('', verifyToken, dataController.getAllData);
+router.get('/user', verifyToken, dataController.getUserData);
+router.get('/type', verifyToken, dataController.getUserDataByType);
+router.post('', verifyToken, dataController.createData);
+router.put('/:id', verifyToken, dataController.updateData);
+router.delete('/:id', verifyToken, dataController.deleteData);
 
 export default router;

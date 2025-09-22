@@ -5,9 +5,9 @@ import { Router } from 'express';
 const router = Router();
 
 router.get('', verifyToken, userController.getUsers);
-router.get('/:id', userController.getUser);
-router.post('', userController.createUser);
-router.put('/:id', userController.updateUser);
-router.delete('/:id', userController.deleteUser);
+router.get('/:id', verifyToken, userController.getUser);
+router.post('', verifyToken, userController.createUser);
+router.put('/:id', verifyToken, userController.updateUser);
+router.delete('/:id', verifyToken, userController.deleteUser);
 
 export default router;
