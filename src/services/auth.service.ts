@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const prisma = require('../prisma/client');
+import prisma from '../utils/prisma.server';
 import { User } from '../generated/prisma';
 
 const register = async (email: string, password: string): Promise<User> => {
