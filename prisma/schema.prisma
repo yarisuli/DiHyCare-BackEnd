@@ -20,12 +20,12 @@ model User {
   email     String   @unique
   password  String
   token     String?   @unique @default(uuid())
-  name      String
-  surname   String
-  age       Int
-  sex       Sex
-  weight    Int
-  height    Int
+  name      String?
+  surname   String?
+  age       Int?
+  sex       Sex?
+  weight    Int?
+  height    Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
