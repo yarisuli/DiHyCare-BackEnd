@@ -16,10 +16,10 @@ export const verifyToken = async (
 
     const payload = jwt.verify(token, 'secret') as jwt.JwtPayload;
 
-    if (!payload.id)
+    if (!payload.userId)
       return res.status(400).json({ message: 'Token does not contain id.' });
 
-    req.params['id'] = payload.id;
+    req.params['id'] = payload.userId;
 
     next();
   } catch (error: any) {
