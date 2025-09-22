@@ -26,3 +26,5 @@ export const verifyToken = async (
     res.status(500).json({ message: error.message });
   }
 };
+
+export default { verifyToken };

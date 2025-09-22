@@ -1,4 +1,5 @@
 import calendarController from '../controllers/calendar.controller';
+import { verifyToken } from '../middlewares/auth.middleware';
 import { Router } from 'express';
 
 const router = Router();

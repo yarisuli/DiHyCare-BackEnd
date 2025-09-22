@@ -1,9 +1,10 @@
 import userController from '../controllers/user.controller';
+import { verifyToken } from '../middlewares/auth.middleware';
 import { Router } from 'express';
 
 const router = Router();
 
-router.get('', userController.getUsers);
+router.get('', verifyToken, userController.getUsers);
 router.get('/:id', userController.getUser);
 router.post('', userController.createUser);
 router.put('/:id', userController.updateUser);

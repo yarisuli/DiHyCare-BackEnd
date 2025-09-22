@@ -10,6 +10,7 @@ const app = express();
 import userRouter from './routes/user.router';
 import dataRouter from './routes/data.router';
 import calendarRouter from './routes/calendar.router';
+import authRouter from './routes/auth.router';
 import xdripRouter from './routes/xdrip.router';
 import consola from 'consola';
 
@@ -52,6 +53,9 @@ app.use('/data', dataRouter);
 
 //CALENDAR
 app.use('/calendar', calendarRouter);
+
+//AUTHENTIFICATION
+app.use('/auth', authRouter);
 
 //XDRIP
 app.use('/xdrip/v1', xdripRouter);

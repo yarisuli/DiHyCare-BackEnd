@@ -1,4 +1,5 @@
 import dataController from '../controllers/data.controller';
+import { verifyToken } from '../middlewares/auth.middleware';
 import { Router } from 'express';
 
 const router = Router();
