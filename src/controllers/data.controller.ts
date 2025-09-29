@@ -14,7 +14,7 @@ const getAllData = async (req: Request, res: Response) => {
 
 //get data de un usuario
 const getUserData = async (req: Request, res: Response) => {
-  const userId: number = req.body.userId;
+  const userId: number = parseInt(req.params['id']);
 
   try {
     const userData = await dataService.getUserData(userId);
@@ -29,7 +29,7 @@ const getUserData = async (req: Request, res: Response) => {
 
 //get data de un tipo especifico de un usuario
 const getUserDataByType = async (req: Request, res: Response) => {
-  const userId: number = req.body.userId;
+  const userId: number = parseInt(req.params['id']);
   const dataType: string = req.body.dataType;
 
   try {
@@ -47,6 +47,9 @@ const getUserDataByType = async (req: Request, res: Response) => {
 const createData = async (req: Request, res: Response) => {
   try {
     const data = req.body as Data;
+    const userId = parseInt(req.params['id']);
+    data.userId = userId;
+    
     const newData = await dataService.createData(data);
     return res.status(201).json(newData);
   } catch (error: any) {

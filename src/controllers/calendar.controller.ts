@@ -28,7 +28,7 @@ const getEventById = async (req: Request, res: Response) => {
 
 // get eventos de usuario
 const getEventByUser = async (req: Request, res: Response) => {
-  const userId: number = req.body.userId;
+  const userId: number = parseInt(req.params['id']);
 
   try {
     const event = await calendarService.getEventByUser(userId);
