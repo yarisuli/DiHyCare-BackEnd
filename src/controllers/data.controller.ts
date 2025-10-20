@@ -49,7 +49,7 @@ const createData = async (req: Request, res: Response) => {
     const data = req.body as Data;
     const userId = parseInt(req.params['id']);
     data.userId = userId;
-    
+
     const newData = await dataService.createData(data);
     return res.status(201).json(newData);
   } catch (error: any) {
