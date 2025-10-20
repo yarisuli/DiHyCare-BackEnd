@@ -3,10 +3,12 @@ const jwt = require('jsonwebtoken');
 import prisma from '../utils/prisma.server';
 import { User } from '../generated/prisma';
 
-const register = async (email: string, password: string): Promise<User> => {
+const register = async (name: string, surname: string, email: string, password: string): Promise<User> => {
   const hashedPassword = await bcrypt.hash(password, 10);
   return prisma.user.create({
     data: {
+      name,
+      surname,
       email,
       password: hashedPassword
     }

@@ -1586,8 +1586,8 @@ export namespace Prisma {
     email: string
     password: string
     token: string | null
-    name: string | null
-    surname: string | null
+    name: string
+    surname: string
     age: number | null
     sex: $Enums.Sex | null
     weight: number | null
@@ -1701,8 +1701,8 @@ export namespace Prisma {
       email: string
       password: string
       token: string | null
-      name: string | null
-      surname: string | null
+      name: string
+      surname: string
       age: number | null
       sex: $Enums.Sex | null
       weight: number | null
@@ -7257,8 +7257,8 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     token?: StringNullableFilter<"User"> | string | null
-    name?: StringNullableFilter<"User"> | string | null
-    surname?: StringNullableFilter<"User"> | string | null
+    name?: StringFilter<"User"> | string
+    surname?: StringFilter<"User"> | string
     age?: IntNullableFilter<"User"> | number | null
     sex?: EnumSexNullableFilter<"User"> | $Enums.Sex | null
     weight?: IntNullableFilter<"User"> | number | null
@@ -7275,8 +7275,8 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     token?: SortOrderInput | SortOrder
-    name?: SortOrderInput | SortOrder
-    surname?: SortOrderInput | SortOrder
+    name?: SortOrder
+    surname?: SortOrder
     age?: SortOrderInput | SortOrder
     sex?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
@@ -7296,8 +7296,8 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
-    name?: StringNullableFilter<"User"> | string | null
-    surname?: StringNullableFilter<"User"> | string | null
+    name?: StringFilter<"User"> | string
+    surname?: StringFilter<"User"> | string
     age?: IntNullableFilter<"User"> | number | null
     sex?: EnumSexNullableFilter<"User"> | $Enums.Sex | null
     weight?: IntNullableFilter<"User"> | number | null
@@ -7314,8 +7314,8 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     token?: SortOrderInput | SortOrder
-    name?: SortOrderInput | SortOrder
-    surname?: SortOrderInput | SortOrder
+    name?: SortOrder
+    surname?: SortOrder
     age?: SortOrderInput | SortOrder
     sex?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
@@ -7337,8 +7337,8 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     token?: StringNullableWithAggregatesFilter<"User"> | string | null
-    name?: StringNullableWithAggregatesFilter<"User"> | string | null
-    surname?: StringNullableWithAggregatesFilter<"User"> | string | null
+    name?: StringWithAggregatesFilter<"User"> | string
+    surname?: StringWithAggregatesFilter<"User"> | string
     age?: IntNullableWithAggregatesFilter<"User"> | number | null
     sex?: EnumSexNullableWithAggregatesFilter<"User"> | $Enums.Sex | null
     weight?: IntNullableWithAggregatesFilter<"User"> | number | null
@@ -7588,8 +7588,8 @@ export namespace Prisma {
     email: string
     password: string
     token?: string | null
-    name?: string | null
-    surname?: string | null
+    name: string
+    surname: string
     age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
@@ -7606,8 +7606,8 @@ export namespace Prisma {
     email: string
     password: string
     token?: string | null
-    name?: string | null
-    surname?: string | null
+    name: string
+    surname: string
     age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
@@ -7623,8 +7623,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     token?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
@@ -7641,8 +7641,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     token?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
@@ -7659,8 +7659,8 @@ export namespace Prisma {
     email: string
     password: string
     token?: string | null
-    name?: string | null
-    surname?: string | null
+    name: string
+    surname: string
     age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
@@ -7673,8 +7673,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     token?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
@@ -7688,8 +7688,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     token?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9095,8 +9095,8 @@ export namespace Prisma {
     email: string
     password: string
     token?: string | null
-    name?: string | null
-    surname?: string | null
+    name: string
+    surname: string
     age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
@@ -9112,8 +9112,8 @@ export namespace Prisma {
     email: string
     password: string
     token?: string | null
-    name?: string | null
-    surname?: string | null
+    name: string
+    surname: string
     age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
@@ -9160,8 +9160,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     token?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9177,8 +9177,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     token?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9215,8 +9215,8 @@ export namespace Prisma {
     email: string
     password: string
     token?: string | null
-    name?: string | null
-    surname?: string | null
+    name: string
+    surname: string
     age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
@@ -9232,8 +9232,8 @@ export namespace Prisma {
     email: string
     password: string
     token?: string | null
-    name?: string | null
-    surname?: string | null
+    name: string
+    surname: string
     age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
@@ -9264,8 +9264,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     token?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9281,8 +9281,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     token?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9297,8 +9297,8 @@ export namespace Prisma {
     email: string
     password: string
     token?: string | null
-    name?: string | null
-    surname?: string | null
+    name: string
+    surname: string
     age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
@@ -9314,8 +9314,8 @@ export namespace Prisma {
     email: string
     password: string
     token?: string | null
-    name?: string | null
-    surname?: string | null
+    name: string
+    surname: string
     age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
@@ -9346,8 +9346,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     token?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9363,8 +9363,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     token?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    surname?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null

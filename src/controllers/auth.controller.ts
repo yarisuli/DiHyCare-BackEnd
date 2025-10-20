@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 const register = async (req: Request, res: Response) => {
   try {
     const user = req.body as User;
-    const newUser = await authService.register(user.email, user.password);
+    const newUser = await authService.register(user.name, user.surname, user.email, user.password);
     return res.status(201).json(newUser);
   } catch (error: any) {
     return res.status(500).json({ error: error.message });
