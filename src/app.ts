@@ -1,7 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import morganBody from 'morgan-body';
 import bodyParser from 'body-parser';
-
 import cors from 'cors';
 
 const app = express();
@@ -14,14 +13,28 @@ import authRouter from './routes/auth.router';
 import xdripRouter from './routes/xdrip.router';
 import consola from 'consola';
 
-// CORS configuration
+// CORS configuration - ONLY ONE cors() call needed!
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN || 'http://localhost:3000',
+    origin: [
+      'http://localhost:3000', 
+      'https://dihycare-frontend.vercel.app', // Replace with your actual frontend Vercel URL
+      process.env.CLIENT_ORIGIN || 'http://localhost:3000'
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
-    allowedHeaders:
-      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    allowedHeaders: [
+      'X-CSRF-Token', 
+      'X-Requested-With', 
+      'Accept', 
+      'Accept-Version', 
+      'Content-Length', 
+      'Content-MD5', 
+      'Content-Type', 
+      'Date', 
+      'X-Api-Version',
+      'Authorization' // IMPORTANT: Added Authorization header for your JWT tokens!
+    ]
   })
 );
 
