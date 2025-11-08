@@ -1,2 +1,56 @@
 npx prisma db push --> pushea bdd prisma. 
 npm run format --> prettier
+
+//promedio semanal de glucosa de un usuario
+const getWeeklyAverageGlucose = async (
+  userId: number
+): Promise<{ day: string; average: number | null }[]> => {
+  const today = new Date();
+  const endOfToday = new Date(today);
+  endOfToday.setHours(23, 59, 59, 999);
+
+  const weekAgo = new Date(today);
+  weekAgo.setDate(weekAgo.getDate() - 6); // últimos 7 días incluyendo hoy
+  weekAgo.setHours(0, 0, 0, 0);
+
+  const entries = await prisma.data.findMany({
+    where: {
+      userId,
+      dataType: DataType.GLUCOSE,
+      createdAt: {
+        gte: weekAgo,
+        lte: endOfToday
+      }
+    },
+    orderBy: { createdAt: 'asc' }
+  });
+  // inicializar días del rango
+  const days: string[] = [];
+  const grouped: Record<string, number[]> = {};
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(weekAgo);
+    d.setDate(weekAgo.getDate() + i);
+    const key = d.toISOString().split('T')[0];
+    days.push(key);
+    grouped[key] = [];
+  }
+
+  // agrupar por día (YYYY-MM-DD)
+  entries.forEach((e) => {
+    const key = e.createdAt.toISOString().split('T')[0];
+    if (grouped[key]) grouped[key].push(Number(e.value));
+  });
+
+  // calcular promedios diarios, null si no hay datos
+  const dailyAverages = days.map((day) => {
+    const values = grouped[day];
+    if (!values || values.length === 0) return { day, average: null };
+    const sum = values.reduce((a, b) => a + b, 0);
+    const avg = sum / values.length;
+    return { day, average: Number(avg.toFixed(2)) };
+  });
+
+  return dailyAverages;
+};
+
+TODO ESTO GENERA DATOS RANDOM PARA INGRESAR AL USUARIO 2
