@@ -28,14 +28,13 @@ const getUserByToken = async (token: string): Promise<User | null> => {
 
 //crear un usuario
 const createUser = async (user: Omit<User, 'id'>): Promise<User> => {
-  const { email, password, name, surname, age, sex, weight, height } = user;
+  const { email, password, name, surname, sex, weight, height } = user;
   return prisma.user.create({
     data: {
       email,
       password,
       name,
       surname,
-      age,
       sex,
       weight,
       height
@@ -53,7 +52,6 @@ const updateUser = async (
     password,
     name,
     surname,
-    age,
     sex,
     weight,
     height,
@@ -68,7 +66,6 @@ const updateUser = async (
       password,
       name,
       surname,
-      age,
       sex,
       weight,
       height,

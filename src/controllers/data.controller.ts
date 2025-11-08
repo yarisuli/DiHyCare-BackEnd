@@ -43,6 +43,22 @@ const getUserDataByType = async (req: Request, res: Response) => {
   }
 };
 
+// obtener promedios diarios de GLUCOSE últimos 7 días para el usuario autenticado
+const getWeeklyAverageGlucose = async (req: Request, res: Response) => {
+  try {
+    const userId = Number(req.params['id']);
+    if (isNaN(userId)) {
+      return res.status(400).json({ error: 'Invalid user ID' });
+    }
+
+    const averages = await dataService.getWeeklyAverageGlucose(userId);
+    return res.status(200).json(averages);
+  } catch (error: any) {
+    console.error('Error in getWeeklyAverageGlucose controller:', error);
+    return res.status(500).json({ error: 'Failed to get weekly glucose averages' });
+  }
+};
+
 //crear data de un usuario
 const createData = async (req: Request, res: Response) => {
   try {
@@ -89,6 +105,7 @@ const user = {
   getAllData,
   getUserData,
   getUserDataByType,
+  getWeeklyAverageGlucose,
   createData,
   updateData,
   deleteData
