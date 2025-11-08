@@ -127,7 +127,6 @@ exports.Prisma.UserScalarFieldEnum = {
   token: 'token',
   name: 'name',
   surname: 'surname',
-  age: 'age',
   sex: 'sex',
   weight: 'weight',
   height: 'height',
@@ -194,7 +193,6 @@ exports.DataType = exports.$Enums.DataType = {
   CARBS: 'CARBS',
   INSULIN: 'INSULIN',
   PAS: 'PAS',
-  PAD: 'PAD',
   HEART_RATE: 'HEART_RATE'
 };
 

@@ -22,7 +22,6 @@ model User {
   token       String?       @unique @default(uuid())
   name        String
   surname     String
-  age         Int?
   sex         Sex?
   weight      Int?
   height      Int?
@@ -82,7 +81,6 @@ enum DataType {
   INSULIN
 
   PAS
-  PAD
   HEART_RATE
 }
 

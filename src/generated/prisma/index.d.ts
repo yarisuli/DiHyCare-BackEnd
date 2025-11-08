@@ -58,7 +58,6 @@ export const DataType: {
   CARBS: 'CARBS',
   INSULIN: 'INSULIN',
   PAS: 'PAS',
-  PAD: 'PAD',
   HEART_RATE: 'HEART_RATE'
 };
 
@@ -1376,14 +1375,12 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     id: number | null
-    age: number | null
     weight: number | null
     height: number | null
   }
 
   export type UserSumAggregateOutputType = {
     id: number | null
-    age: number | null
     weight: number | null
     height: number | null
   }
@@ -1395,7 +1392,6 @@ export namespace Prisma {
     token: string | null
     name: string | null
     surname: string | null
-    age: number | null
     sex: $Enums.Sex | null
     weight: number | null
     height: number | null
@@ -1410,7 +1406,6 @@ export namespace Prisma {
     token: string | null
     name: string | null
     surname: string | null
-    age: number | null
     sex: $Enums.Sex | null
     weight: number | null
     height: number | null
@@ -1425,7 +1420,6 @@ export namespace Prisma {
     token: number
     name: number
     surname: number
-    age: number
     sex: number
     weight: number
     height: number
@@ -1437,14 +1431,12 @@ export namespace Prisma {
 
   export type UserAvgAggregateInputType = {
     id?: true
-    age?: true
     weight?: true
     height?: true
   }
 
   export type UserSumAggregateInputType = {
     id?: true
-    age?: true
     weight?: true
     height?: true
   }
@@ -1456,7 +1448,6 @@ export namespace Prisma {
     token?: true
     name?: true
     surname?: true
-    age?: true
     sex?: true
     weight?: true
     height?: true
@@ -1471,7 +1462,6 @@ export namespace Prisma {
     token?: true
     name?: true
     surname?: true
-    age?: true
     sex?: true
     weight?: true
     height?: true
@@ -1486,7 +1476,6 @@ export namespace Prisma {
     token?: true
     name?: true
     surname?: true
-    age?: true
     sex?: true
     weight?: true
     height?: true
@@ -1588,7 +1577,6 @@ export namespace Prisma {
     token: string | null
     name: string
     surname: string
-    age: number | null
     sex: $Enums.Sex | null
     weight: number | null
     height: number | null
@@ -1622,7 +1610,6 @@ export namespace Prisma {
     token?: boolean
     name?: boolean
     surname?: boolean
-    age?: boolean
     sex?: boolean
     weight?: boolean
     height?: boolean
@@ -1641,7 +1628,6 @@ export namespace Prisma {
     token?: boolean
     name?: boolean
     surname?: boolean
-    age?: boolean
     sex?: boolean
     weight?: boolean
     height?: boolean
@@ -1656,7 +1642,6 @@ export namespace Prisma {
     token?: boolean
     name?: boolean
     surname?: boolean
-    age?: boolean
     sex?: boolean
     weight?: boolean
     height?: boolean
@@ -1671,7 +1656,6 @@ export namespace Prisma {
     token?: boolean
     name?: boolean
     surname?: boolean
-    age?: boolean
     sex?: boolean
     weight?: boolean
     height?: boolean
@@ -1679,7 +1663,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "token" | "name" | "surname" | "age" | "sex" | "weight" | "height" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "token" | "name" | "surname" | "sex" | "weight" | "height" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     UserDisease?: boolean | User$UserDiseaseArgs<ExtArgs>
     Data?: boolean | User$DataArgs<ExtArgs>
@@ -1703,7 +1687,6 @@ export namespace Prisma {
       token: string | null
       name: string
       surname: string
-      age: number | null
       sex: $Enums.Sex | null
       weight: number | null
       height: number | null
@@ -2141,7 +2124,6 @@ export namespace Prisma {
     readonly token: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
     readonly surname: FieldRef<"User", 'String'>
-    readonly age: FieldRef<"User", 'Int'>
     readonly sex: FieldRef<"User", 'Sex'>
     readonly weight: FieldRef<"User", 'Int'>
     readonly height: FieldRef<"User", 'Int'>
@@ -7063,7 +7045,6 @@ export namespace Prisma {
     token: 'token',
     name: 'name',
     surname: 'surname',
-    age: 'age',
     sex: 'sex',
     weight: 'weight',
     height: 'height',
@@ -7259,7 +7240,6 @@ export namespace Prisma {
     token?: StringNullableFilter<"User"> | string | null
     name?: StringFilter<"User"> | string
     surname?: StringFilter<"User"> | string
-    age?: IntNullableFilter<"User"> | number | null
     sex?: EnumSexNullableFilter<"User"> | $Enums.Sex | null
     weight?: IntNullableFilter<"User"> | number | null
     height?: IntNullableFilter<"User"> | number | null
@@ -7277,7 +7257,6 @@ export namespace Prisma {
     token?: SortOrderInput | SortOrder
     name?: SortOrder
     surname?: SortOrder
-    age?: SortOrderInput | SortOrder
     sex?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
     height?: SortOrderInput | SortOrder
@@ -7298,7 +7277,6 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
     surname?: StringFilter<"User"> | string
-    age?: IntNullableFilter<"User"> | number | null
     sex?: EnumSexNullableFilter<"User"> | $Enums.Sex | null
     weight?: IntNullableFilter<"User"> | number | null
     height?: IntNullableFilter<"User"> | number | null
@@ -7316,7 +7294,6 @@ export namespace Prisma {
     token?: SortOrderInput | SortOrder
     name?: SortOrder
     surname?: SortOrder
-    age?: SortOrderInput | SortOrder
     sex?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
     height?: SortOrderInput | SortOrder
@@ -7339,7 +7316,6 @@ export namespace Prisma {
     token?: StringNullableWithAggregatesFilter<"User"> | string | null
     name?: StringWithAggregatesFilter<"User"> | string
     surname?: StringWithAggregatesFilter<"User"> | string
-    age?: IntNullableWithAggregatesFilter<"User"> | number | null
     sex?: EnumSexNullableWithAggregatesFilter<"User"> | $Enums.Sex | null
     weight?: IntNullableWithAggregatesFilter<"User"> | number | null
     height?: IntNullableWithAggregatesFilter<"User"> | number | null
@@ -7590,7 +7566,6 @@ export namespace Prisma {
     token?: string | null
     name: string
     surname: string
-    age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
     height?: number | null
@@ -7608,7 +7583,6 @@ export namespace Prisma {
     token?: string | null
     name: string
     surname: string
-    age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
     height?: number | null
@@ -7625,7 +7599,6 @@ export namespace Prisma {
     token?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     surname?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
@@ -7643,7 +7616,6 @@ export namespace Prisma {
     token?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     surname?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
@@ -7661,7 +7633,6 @@ export namespace Prisma {
     token?: string | null
     name: string
     surname: string
-    age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
     height?: number | null
@@ -7675,7 +7646,6 @@ export namespace Prisma {
     token?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     surname?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
@@ -7690,7 +7660,6 @@ export namespace Prisma {
     token?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     surname?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
@@ -7961,6 +7930,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type EnumSexNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Sex | EnumSexFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumSexNullableFilter<$PrismaModel> | $Enums.Sex | null
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -7970,13 +7946,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type EnumSexNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.Sex | EnumSexFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumSexNullableFilter<$PrismaModel> | $Enums.Sex | null
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -8032,7 +8001,6 @@ export namespace Prisma {
     token?: SortOrder
     name?: SortOrder
     surname?: SortOrder
-    age?: SortOrder
     sex?: SortOrder
     weight?: SortOrder
     height?: SortOrder
@@ -8042,7 +8010,6 @@ export namespace Prisma {
 
   export type UserAvgOrderByAggregateInput = {
     id?: SortOrder
-    age?: SortOrder
     weight?: SortOrder
     height?: SortOrder
   }
@@ -8054,7 +8021,6 @@ export namespace Prisma {
     token?: SortOrder
     name?: SortOrder
     surname?: SortOrder
-    age?: SortOrder
     sex?: SortOrder
     weight?: SortOrder
     height?: SortOrder
@@ -8069,7 +8035,6 @@ export namespace Prisma {
     token?: SortOrder
     name?: SortOrder
     surname?: SortOrder
-    age?: SortOrder
     sex?: SortOrder
     weight?: SortOrder
     height?: SortOrder
@@ -8079,7 +8044,6 @@ export namespace Prisma {
 
   export type UserSumOrderByAggregateInput = {
     id?: SortOrder
-    age?: SortOrder
     weight?: SortOrder
     height?: SortOrder
   }
@@ -8136,6 +8100,16 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type EnumSexNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Sex | EnumSexFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumSexNullableWithAggregatesFilter<$PrismaModel> | $Enums.Sex | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumSexNullableFilter<$PrismaModel>
+    _max?: NestedEnumSexNullableFilter<$PrismaModel>
+  }
+
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -8150,16 +8124,6 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type EnumSexNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Sex | EnumSexFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumSexNullableWithAggregatesFilter<$PrismaModel> | $Enums.Sex | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumSexNullableFilter<$PrismaModel>
-    _max?: NestedEnumSexNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -8441,16 +8405,16 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type NullableEnumSexFieldUpdateOperationsInput = {
+    set?: $Enums.Sex | null
+  }
+
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type NullableEnumSexFieldUpdateOperationsInput = {
-    set?: $Enums.Sex | null
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -8702,6 +8666,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedEnumSexNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Sex | EnumSexFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumSexNullableFilter<$PrismaModel> | $Enums.Sex | null
+  }
+
   export type NestedIntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -8711,13 +8682,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedEnumSexNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.Sex | EnumSexFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumSexNullableFilter<$PrismaModel> | $Enums.Sex | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -8792,6 +8756,16 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumSexNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Sex | EnumSexFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumSexNullableWithAggregatesFilter<$PrismaModel> | $Enums.Sex | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumSexNullableFilter<$PrismaModel>
+    _max?: NestedEnumSexNullableFilter<$PrismaModel>
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -8817,16 +8791,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedEnumSexNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Sex | EnumSexFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumSexNullableWithAggregatesFilter<$PrismaModel> | $Enums.Sex | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumSexNullableFilter<$PrismaModel>
-    _max?: NestedEnumSexNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -9097,7 +9061,6 @@ export namespace Prisma {
     token?: string | null
     name: string
     surname: string
-    age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
     height?: number | null
@@ -9114,7 +9077,6 @@ export namespace Prisma {
     token?: string | null
     name: string
     surname: string
-    age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
     height?: number | null
@@ -9162,7 +9124,6 @@ export namespace Prisma {
     token?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     surname?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9179,7 +9140,6 @@ export namespace Prisma {
     token?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     surname?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9217,7 +9177,6 @@ export namespace Prisma {
     token?: string | null
     name: string
     surname: string
-    age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
     height?: number | null
@@ -9234,7 +9193,6 @@ export namespace Prisma {
     token?: string | null
     name: string
     surname: string
-    age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
     height?: number | null
@@ -9266,7 +9224,6 @@ export namespace Prisma {
     token?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     surname?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9283,7 +9240,6 @@ export namespace Prisma {
     token?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     surname?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9299,7 +9255,6 @@ export namespace Prisma {
     token?: string | null
     name: string
     surname: string
-    age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
     height?: number | null
@@ -9316,7 +9271,6 @@ export namespace Prisma {
     token?: string | null
     name: string
     surname: string
-    age?: number | null
     sex?: $Enums.Sex | null
     weight?: number | null
     height?: number | null
@@ -9348,7 +9302,6 @@ export namespace Prisma {
     token?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     surname?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9365,7 +9318,6 @@ export namespace Prisma {
     token?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     surname?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
     sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
     height?: NullableIntFieldUpdateOperationsInput | number | null
