@@ -75,6 +75,32 @@ const getWeeklyAveragePressure = async (req: Request, res: Response) => {
   }
 };
 
+const getLatestDataByType = async (req: Request, res: Response) => {
+  try {
+    const userId = Number(req.params['id']);
+    if (isNaN(userId)) {
+      return res.status(400).json({ error: 'Invalid user ID' });
+    }
+
+    const latestData = await dataService.getLatestDataByType(userId);
+    
+    // Check if we got any data back (object with at least one non-null value)
+    const hasData = Object.values(latestData).some(entry => entry !== null);
+    if (!hasData) {
+      return res.status(404).json({ error: 'No data found for this user' });
+    }
+
+    return res.status(200).json(latestData);
+
+  } catch (error: any) {
+    console.error('Error in getLatestDataByType:', error);
+    return res.status(500).json({ 
+      error: 'Failed to fetch latest data',
+      details: error.message 
+    });
+  }
+};
+
 //crear data de un usuario
 const createData = async (req: Request, res: Response) => {
   try {
@@ -123,6 +149,7 @@ const user = {
   getUserDataByType,
   getWeeklyAverageGlucose,
   getWeeklyAveragePressure,
+  getLatestDataByType,
   createData,
   updateData,
   deleteData

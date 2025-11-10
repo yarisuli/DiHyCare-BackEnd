@@ -158,6 +158,39 @@ const getWeeklyAveragePressure = async (
   return dailyAverages;
 };
 
+//obtiene ultimo registro de cada tipo de data para un usuario
+const getLatestDataByType = async (
+  userId: number
+): Promise<Record<string, Data | null>> => {
+  try {
+    const dataTypes = Object.values(DataType);
+    const latestData: Record<string, Data | null> = {};
+
+    for (const type of dataTypes) {
+      try {
+        const dataEntry = await prisma.data.findFirst({
+          where: {
+            userId,
+            dataType: type
+          },
+          orderBy: {
+            createdAt: 'desc'
+          }
+        });
+        latestData[type] = dataEntry;
+      } catch (error) {
+        console.error(`Error fetching ${type} data:`, error);
+        latestData[type] = null;
+      }
+    }
+
+    return latestData;
+  } catch (error: any) {
+    console.error('Error in getLatestDataByTypeForUser:', error);
+    throw new Error(`Failed to get latest data: ${error.message}`);
+  }
+};
+
 //crear data de un usuario
 const createData = async (data: Omit<Data, 'id'>): Promise<Data> => {
   const { dataType, value, description, userId } = data;
@@ -203,6 +236,7 @@ export default {
   getUserDataByType,
   getWeeklyAverageGlucose,
   getWeeklyAveragePressure,
+  getLatestDataByType,
   createData,
   updateData,
   deleteData
