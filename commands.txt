@@ -53,4 +53,42 @@ const getWeeklyAverageGlucose = async (
   return dailyAverages;
 };
 
-TODO ESTO GENERA DATOS RANDOM PARA INGRESAR AL USUARIO 2
+TODO ESTO GENERA DATOS RANDOM DE GLUCOSA PARA INGRESAR AL USUARIO 2
+
+DO $$
+DECLARE
+  start_date DATE := (current_date - INTERVAL '6 months')::date;
+  end_date   DATE := current_date;
+  d          DATE;
+  cnt        INT;
+  i          INT;
+  ts         TIMESTAMP;
+  val_pas    NUMERIC;
+  val_pad    NUMERIC;
+BEGIN
+  FOR d IN SELECT generate_series(start_date, end_date, '1 day')::date LOOP
+    -- genera 5-10 registros por día
+    cnt := floor(random() * 6)::int + 5;
+    
+    FOR i IN 1..cnt LOOP
+      -- timestamp aleatorio dentro del día
+      ts := d + (floor(random() * 86400)::int || ' seconds')::interval;
+      
+      -- PAS: valor aleatorio entre 90 y 140 con 1 decimal
+      val_pas := round((random() * (140 - 90) + 90)::numeric, 1);
+      -- PAD: valor aleatorio entre 60 y 90 con 1 decimal
+      val_pad := round((random() * (90 - 60) + 60)::numeric, 1);
+      
+      -- Insertar PAS
+      INSERT INTO "data" ("dataType", "value", description, "createdAt", "userId")
+      VALUES ('PAS'::"DataType", val_pas, NULL, ts, 2);
+      
+      -- Insertar PAD (mismo timestamp)
+      INSERT INTO "data" ("dataType", "value", description, "createdAt", "userId")
+      VALUES ('PAD'::"DataType", val_pad, NULL, ts, 2);
+    END LOOP;
+  END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+LO MISMO PERO CON PAS Y PAD

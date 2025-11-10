@@ -58,6 +58,7 @@ export const DataType: {
   CARBS: 'CARBS',
   INSULIN: 'INSULIN',
   PAS: 'PAS',
+  PAD: 'PAD',
   HEART_RATE: 'HEART_RATE'
 };
 
@@ -4804,6 +4805,7 @@ export namespace Prisma {
     id: number | null
     dataType: $Enums.DataType | null
     value: number | null
+    pressure: string | null
     description: string | null
     createdAt: Date | null
     userId: number | null
@@ -4813,6 +4815,7 @@ export namespace Prisma {
     id: number | null
     dataType: $Enums.DataType | null
     value: number | null
+    pressure: string | null
     description: string | null
     createdAt: Date | null
     userId: number | null
@@ -4822,6 +4825,7 @@ export namespace Prisma {
     id: number
     dataType: number
     value: number
+    pressure: number
     description: number
     createdAt: number
     userId: number
@@ -4845,6 +4849,7 @@ export namespace Prisma {
     id?: true
     dataType?: true
     value?: true
+    pressure?: true
     description?: true
     createdAt?: true
     userId?: true
@@ -4854,6 +4859,7 @@ export namespace Prisma {
     id?: true
     dataType?: true
     value?: true
+    pressure?: true
     description?: true
     createdAt?: true
     userId?: true
@@ -4863,6 +4869,7 @@ export namespace Prisma {
     id?: true
     dataType?: true
     value?: true
+    pressure?: true
     description?: true
     createdAt?: true
     userId?: true
@@ -4958,7 +4965,8 @@ export namespace Prisma {
   export type DataGroupByOutputType = {
     id: number
     dataType: $Enums.DataType
-    value: number
+    value: number | null
+    pressure: string | null
     description: string | null
     createdAt: Date
     userId: number
@@ -4987,6 +4995,7 @@ export namespace Prisma {
     id?: boolean
     dataType?: boolean
     value?: boolean
+    pressure?: boolean
     description?: boolean
     createdAt?: boolean
     userId?: boolean
@@ -4997,6 +5006,7 @@ export namespace Prisma {
     id?: boolean
     dataType?: boolean
     value?: boolean
+    pressure?: boolean
     description?: boolean
     createdAt?: boolean
     userId?: boolean
@@ -5007,6 +5017,7 @@ export namespace Prisma {
     id?: boolean
     dataType?: boolean
     value?: boolean
+    pressure?: boolean
     description?: boolean
     createdAt?: boolean
     userId?: boolean
@@ -5017,12 +5028,13 @@ export namespace Prisma {
     id?: boolean
     dataType?: boolean
     value?: boolean
+    pressure?: boolean
     description?: boolean
     createdAt?: boolean
     userId?: boolean
   }
 
-  export type DataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dataType" | "value" | "description" | "createdAt" | "userId", ExtArgs["result"]["data"]>
+  export type DataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dataType" | "value" | "pressure" | "description" | "createdAt" | "userId", ExtArgs["result"]["data"]>
   export type DataInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5041,7 +5053,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       dataType: $Enums.DataType
-      value: number
+      value: number | null
+      pressure: string | null
       description: string | null
       createdAt: Date
       userId: number
@@ -5472,6 +5485,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Data", 'Int'>
     readonly dataType: FieldRef<"Data", 'DataType'>
     readonly value: FieldRef<"Data", 'Float'>
+    readonly pressure: FieldRef<"Data", 'String'>
     readonly description: FieldRef<"Data", 'String'>
     readonly createdAt: FieldRef<"Data", 'DateTime'>
     readonly userId: FieldRef<"Data", 'Int'>
@@ -7078,6 +7092,7 @@ export namespace Prisma {
     id: 'id',
     dataType: 'dataType',
     value: 'value',
+    pressure: 'pressure',
     description: 'description',
     createdAt: 'createdAt',
     userId: 'userId'
@@ -7432,7 +7447,8 @@ export namespace Prisma {
     NOT?: DataWhereInput | DataWhereInput[]
     id?: IntFilter<"Data"> | number
     dataType?: EnumDataTypeFilter<"Data"> | $Enums.DataType
-    value?: FloatFilter<"Data"> | number
+    value?: FloatNullableFilter<"Data"> | number | null
+    pressure?: StringNullableFilter<"Data"> | string | null
     description?: StringNullableFilter<"Data"> | string | null
     createdAt?: DateTimeFilter<"Data"> | Date | string
     userId?: IntFilter<"Data"> | number
@@ -7442,7 +7458,8 @@ export namespace Prisma {
   export type DataOrderByWithRelationInput = {
     id?: SortOrder
     dataType?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
+    pressure?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
@@ -7455,7 +7472,8 @@ export namespace Prisma {
     OR?: DataWhereInput[]
     NOT?: DataWhereInput | DataWhereInput[]
     dataType?: EnumDataTypeFilter<"Data"> | $Enums.DataType
-    value?: FloatFilter<"Data"> | number
+    value?: FloatNullableFilter<"Data"> | number | null
+    pressure?: StringNullableFilter<"Data"> | string | null
     description?: StringNullableFilter<"Data"> | string | null
     createdAt?: DateTimeFilter<"Data"> | Date | string
     userId?: IntFilter<"Data"> | number
@@ -7465,7 +7483,8 @@ export namespace Prisma {
   export type DataOrderByWithAggregationInput = {
     id?: SortOrder
     dataType?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
+    pressure?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
@@ -7482,7 +7501,8 @@ export namespace Prisma {
     NOT?: DataScalarWhereWithAggregatesInput | DataScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Data"> | number
     dataType?: EnumDataTypeWithAggregatesFilter<"Data"> | $Enums.DataType
-    value?: FloatWithAggregatesFilter<"Data"> | number
+    value?: FloatNullableWithAggregatesFilter<"Data"> | number | null
+    pressure?: StringNullableWithAggregatesFilter<"Data"> | string | null
     description?: StringNullableWithAggregatesFilter<"Data"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Data"> | Date | string
     userId?: IntWithAggregatesFilter<"Data"> | number
@@ -7759,7 +7779,8 @@ export namespace Prisma {
 
   export type DataCreateInput = {
     dataType: $Enums.DataType
-    value: number
+    value?: number | null
+    pressure?: string | null
     description?: string | null
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutDataInput
@@ -7768,7 +7789,8 @@ export namespace Prisma {
   export type DataUncheckedCreateInput = {
     id?: number
     dataType: $Enums.DataType
-    value: number
+    value?: number | null
+    pressure?: string | null
     description?: string | null
     createdAt?: Date | string
     userId: number
@@ -7776,7 +7798,8 @@ export namespace Prisma {
 
   export type DataUpdateInput = {
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: FloatFieldUpdateOperationsInput | number
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    pressure?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutDataNestedInput
@@ -7785,7 +7808,8 @@ export namespace Prisma {
   export type DataUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: FloatFieldUpdateOperationsInput | number
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    pressure?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -7794,7 +7818,8 @@ export namespace Prisma {
   export type DataCreateManyInput = {
     id?: number
     dataType: $Enums.DataType
-    value: number
+    value?: number | null
+    pressure?: string | null
     description?: string | null
     createdAt?: Date | string
     userId: number
@@ -7802,7 +7827,8 @@ export namespace Prisma {
 
   export type DataUpdateManyMutationInput = {
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: FloatFieldUpdateOperationsInput | number
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    pressure?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7810,7 +7836,8 @@ export namespace Prisma {
   export type DataUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: FloatFieldUpdateOperationsInput | number
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    pressure?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -8219,21 +8246,22 @@ export namespace Prisma {
     not?: NestedEnumDataTypeFilter<$PrismaModel> | $Enums.DataType
   }
 
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type DataCountOrderByAggregateInput = {
     id?: SortOrder
     dataType?: SortOrder
     value?: SortOrder
+    pressure?: SortOrder
     description?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
@@ -8249,6 +8277,7 @@ export namespace Prisma {
     id?: SortOrder
     dataType?: SortOrder
     value?: SortOrder
+    pressure?: SortOrder
     description?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
@@ -8258,6 +8287,7 @@ export namespace Prisma {
     id?: SortOrder
     dataType?: SortOrder
     value?: SortOrder
+    pressure?: SortOrder
     description?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
@@ -8279,20 +8309,20 @@ export namespace Prisma {
     _max?: NestedEnumDataTypeFilter<$PrismaModel>
   }
 
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type EnumEventTypeFilter<$PrismaModel = never> = {
@@ -8593,8 +8623,8 @@ export namespace Prisma {
     set?: $Enums.DataType
   }
 
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
@@ -8824,20 +8854,20 @@ export namespace Prisma {
     _max?: NestedEnumDataTypeFilter<$PrismaModel>
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumEventTypeFilter<$PrismaModel = never> = {
@@ -8881,7 +8911,8 @@ export namespace Prisma {
 
   export type DataCreateWithoutUserInput = {
     dataType: $Enums.DataType
-    value: number
+    value?: number | null
+    pressure?: string | null
     description?: string | null
     createdAt?: Date | string
   }
@@ -8889,7 +8920,8 @@ export namespace Prisma {
   export type DataUncheckedCreateWithoutUserInput = {
     id?: number
     dataType: $Enums.DataType
-    value: number
+    value?: number | null
+    pressure?: string | null
     description?: string | null
     createdAt?: Date | string
   }
@@ -8981,7 +9013,8 @@ export namespace Prisma {
     NOT?: DataScalarWhereInput | DataScalarWhereInput[]
     id?: IntFilter<"Data"> | number
     dataType?: EnumDataTypeFilter<"Data"> | $Enums.DataType
-    value?: FloatFilter<"Data"> | number
+    value?: FloatNullableFilter<"Data"> | number | null
+    pressure?: StringNullableFilter<"Data"> | string | null
     description?: StringNullableFilter<"Data"> | string | null
     createdAt?: DateTimeFilter<"Data"> | Date | string
     userId?: IntFilter<"Data"> | number
@@ -9336,7 +9369,8 @@ export namespace Prisma {
   export type DataCreateManyUserInput = {
     id?: number
     dataType: $Enums.DataType
-    value: number
+    value?: number | null
+    pressure?: string | null
     description?: string | null
     createdAt?: Date | string
   }
@@ -9371,7 +9405,8 @@ export namespace Prisma {
 
   export type DataUpdateWithoutUserInput = {
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: FloatFieldUpdateOperationsInput | number
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    pressure?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9379,7 +9414,8 @@ export namespace Prisma {
   export type DataUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: FloatFieldUpdateOperationsInput | number
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    pressure?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9387,7 +9423,8 @@ export namespace Prisma {
   export type DataUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: FloatFieldUpdateOperationsInput | number
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    pressure?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

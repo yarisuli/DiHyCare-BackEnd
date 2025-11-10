@@ -82,6 +82,81 @@ const getWeeklyAverageGlucose = async (
   return dailyAverages;
 };
 
+//promedio semanal de presion de un usuario
+const getWeeklyAveragePressure = async (
+  userId: number
+): Promise<{ day: string; PAS: number | null; PAD: number | null }[]> => {
+  const today = new Date();
+  const endOfToday = new Date(today);
+  endOfToday.setHours(23, 59, 59, 999);
+
+  const weekAgo = new Date(today);
+  weekAgo.setDate(weekAgo.getDate() - 6);
+  weekAgo.setHours(0, 0, 0, 0);
+
+  // Obtener datos PAS y PAD
+  const [entriesPAS, entriesPAD] = await Promise.all([
+    prisma.data.findMany({
+      where: {
+        userId,
+        dataType: DataType.PAS,
+        createdAt: { gte: weekAgo, lte: endOfToday }
+      },
+      orderBy: { createdAt: 'asc' }
+    }),
+    prisma.data.findMany({
+      where: {
+        userId,
+        dataType: DataType.PAD,
+        createdAt: { gte: weekAgo, lte: endOfToday }
+      },
+      orderBy: { createdAt: 'asc' }
+    })
+  ]);
+
+  // Inicializar días
+  const days: string[] = [];
+  const groupedPAS: Record<string, number[]> = {};
+  const groupedPAD: Record<string, number[]> = {};
+  
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(weekAgo);
+    d.setDate(weekAgo.getDate() + i);
+    const key = d.toISOString().split('T')[0];
+    days.push(key);
+    groupedPAS[key] = [];
+    groupedPAD[key] = [];
+  }
+
+  // Agrupar valores por día
+  entriesPAS.forEach((e) => {
+    const key = e.createdAt.toISOString().split('T')[0];
+    if (groupedPAS[key]) groupedPAS[key].push(Number(e.value));
+  });
+
+  entriesPAD.forEach((e) => {
+    const key = e.createdAt.toISOString().split('T')[0];
+    if (groupedPAD[key]) groupedPAD[key].push(Number(e.value));
+  });
+
+  // Calcular promedios diarios
+  const dailyAverages = days.map((day) => {
+    const valuesPAS = groupedPAS[day];
+    const valuesPAD = groupedPAD[day];
+
+    const PAS = valuesPAS && valuesPAS.length > 0
+      ? Number((valuesPAS.reduce((a, b) => a + b, 0) / valuesPAS.length).toFixed(2))
+      : null;
+
+    const PAD = valuesPAD && valuesPAD.length > 0
+      ? Number((valuesPAD.reduce((a, b) => a + b, 0) / valuesPAD.length).toFixed(2))
+      : null;
+
+    return { day, PAS, PAD };
+  });
+
+  return dailyAverages;
+};
 
 //crear data de un usuario
 const createData = async (data: Omit<Data, 'id'>): Promise<Data> => {
@@ -127,6 +202,7 @@ export default {
   getUserData,
   getUserDataByType,
   getWeeklyAverageGlucose,
+  getWeeklyAveragePressure,
   createData,
   updateData,
   deleteData
