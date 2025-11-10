@@ -105,7 +105,7 @@ export const EventType: typeof $Enums.EventType
  */
 export class PrismaClient<
   ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
+  const U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
   ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
@@ -137,13 +137,6 @@ export class PrismaClient<
    * Disconnect from the database
    */
   $disconnect(): $Utils.JsPromise<void>;
-
-  /**
-   * Add a middleware
-   * @deprecated since 4.16.0. For new code, prefer client extensions instead.
-   * @see https://pris.ly/d/extensions
-   */
-  $use(cb: Prisma.Middleware): void
 
 /**
    * Executes a prepared raw query and returns the number of affected rows.
@@ -321,8 +314,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.19.0
+   * Query Engine version: 2ba551f319ab1df4bc874a89965d8b3641056773
    */
   export type PrismaVersion = {
     client: string
@@ -335,6 +328,7 @@ export namespace Prisma {
    */
 
 
+  export import Bytes = runtime.Bytes
   export import JsonObject = runtime.JsonObject
   export import JsonArray = runtime.JsonArray
   export import JsonValue = runtime.JsonValue
@@ -1143,16 +1137,24 @@ export namespace Prisma {
     /**
      * @example
      * ```
-     * // Defaults to stdout
+     * // Shorthand for `emit: 'stdout'`
      * log: ['query', 'info', 'warn', 'error']
      * 
-     * // Emit as events
+     * // Emit as events only
      * log: [
-     *   { emit: 'stdout', level: 'query' },
-     *   { emit: 'stdout', level: 'info' },
-     *   { emit: 'stdout', level: 'warn' }
-     *   { emit: 'stdout', level: 'error' }
+     *   { emit: 'event', level: 'query' },
+     *   { emit: 'event', level: 'info' },
+     *   { emit: 'event', level: 'warn' }
+     *   { emit: 'event', level: 'error' }
      * ]
+     * 
+     * / Emit as events and log to stdout
+     * og: [
+     *  { emit: 'stdout', level: 'query' },
+     *  { emit: 'stdout', level: 'info' },
+     *  { emit: 'stdout', level: 'warn' }
+     *  { emit: 'stdout', level: 'error' }
+     * 
      * ```
      * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
      */
@@ -1167,6 +1169,10 @@ export namespace Prisma {
       timeout?: number
       isolationLevel?: Prisma.TransactionIsolationLevel
     }
+    /**
+     * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-planetscale`
+     */
+    adapter?: runtime.SqlDriverAdapterFactory | null
     /**
      * Global configuration for omitting model fields by default.
      * 
@@ -1198,10 +1204,15 @@ export namespace Prisma {
     emit: 'stdout' | 'event'
   }
 
-  export type GetLogType<T extends LogLevel | LogDefinition> = T extends LogDefinition ? T['emit'] extends 'event' ? T['level'] : never : never
-  export type GetEvents<T extends any> = T extends Array<LogLevel | LogDefinition> ?
-    GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
-    : never
+  export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
+
+  export type GetLogType<T> = CheckIsLogLevel<
+    T extends LogDefinition ? T['level'] : T
+  >;
+
+  export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition>
+    ? GetLogType<T[number]>
+    : never;
 
   export type QueryEvent = {
     timestamp: Date
@@ -1241,25 +1252,6 @@ export namespace Prisma {
     | 'runCommandRaw'
     | 'findRaw'
     | 'groupBy'
-
-  /**
-   * These options are being passed into the middleware as "params"
-   */
-  export type MiddlewareParams = {
-    model?: ModelName
-    action: PrismaAction
-    args: any
-    dataPath: string[]
-    runInTransaction: boolean
-  }
-
-  /**
-   * The `T` type makes sure, that the `return proceed` is not forgotten in the middleware implementation
-   */
-  export type Middleware<T = any> = (
-    params: MiddlewareParams,
-    next: (params: MiddlewareParams) => $Utils.JsPromise<T>,
-  ) => $Utils.JsPromise<T>
 
   // tested in getLogLevel.test.ts
   export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
@@ -4805,7 +4797,6 @@ export namespace Prisma {
     id: number | null
     dataType: $Enums.DataType | null
     value: number | null
-    pressure: string | null
     description: string | null
     createdAt: Date | null
     userId: number | null
@@ -4815,7 +4806,6 @@ export namespace Prisma {
     id: number | null
     dataType: $Enums.DataType | null
     value: number | null
-    pressure: string | null
     description: string | null
     createdAt: Date | null
     userId: number | null
@@ -4825,7 +4815,6 @@ export namespace Prisma {
     id: number
     dataType: number
     value: number
-    pressure: number
     description: number
     createdAt: number
     userId: number
@@ -4849,7 +4838,6 @@ export namespace Prisma {
     id?: true
     dataType?: true
     value?: true
-    pressure?: true
     description?: true
     createdAt?: true
     userId?: true
@@ -4859,7 +4847,6 @@ export namespace Prisma {
     id?: true
     dataType?: true
     value?: true
-    pressure?: true
     description?: true
     createdAt?: true
     userId?: true
@@ -4869,7 +4856,6 @@ export namespace Prisma {
     id?: true
     dataType?: true
     value?: true
-    pressure?: true
     description?: true
     createdAt?: true
     userId?: true
@@ -4965,8 +4951,7 @@ export namespace Prisma {
   export type DataGroupByOutputType = {
     id: number
     dataType: $Enums.DataType
-    value: number | null
-    pressure: string | null
+    value: number
     description: string | null
     createdAt: Date
     userId: number
@@ -4995,7 +4980,6 @@ export namespace Prisma {
     id?: boolean
     dataType?: boolean
     value?: boolean
-    pressure?: boolean
     description?: boolean
     createdAt?: boolean
     userId?: boolean
@@ -5006,7 +4990,6 @@ export namespace Prisma {
     id?: boolean
     dataType?: boolean
     value?: boolean
-    pressure?: boolean
     description?: boolean
     createdAt?: boolean
     userId?: boolean
@@ -5017,7 +5000,6 @@ export namespace Prisma {
     id?: boolean
     dataType?: boolean
     value?: boolean
-    pressure?: boolean
     description?: boolean
     createdAt?: boolean
     userId?: boolean
@@ -5028,13 +5010,12 @@ export namespace Prisma {
     id?: boolean
     dataType?: boolean
     value?: boolean
-    pressure?: boolean
     description?: boolean
     createdAt?: boolean
     userId?: boolean
   }
 
-  export type DataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dataType" | "value" | "pressure" | "description" | "createdAt" | "userId", ExtArgs["result"]["data"]>
+  export type DataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dataType" | "value" | "description" | "createdAt" | "userId", ExtArgs["result"]["data"]>
   export type DataInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5053,8 +5034,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       dataType: $Enums.DataType
-      value: number | null
-      pressure: string | null
+      value: number
       description: string | null
       createdAt: Date
       userId: number
@@ -5485,7 +5465,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Data", 'Int'>
     readonly dataType: FieldRef<"Data", 'DataType'>
     readonly value: FieldRef<"Data", 'Float'>
-    readonly pressure: FieldRef<"Data", 'String'>
     readonly description: FieldRef<"Data", 'String'>
     readonly createdAt: FieldRef<"Data", 'DateTime'>
     readonly userId: FieldRef<"Data", 'Int'>
@@ -7092,7 +7071,6 @@ export namespace Prisma {
     id: 'id',
     dataType: 'dataType',
     value: 'value',
-    pressure: 'pressure',
     description: 'description',
     createdAt: 'createdAt',
     userId: 'userId'
@@ -7447,8 +7425,7 @@ export namespace Prisma {
     NOT?: DataWhereInput | DataWhereInput[]
     id?: IntFilter<"Data"> | number
     dataType?: EnumDataTypeFilter<"Data"> | $Enums.DataType
-    value?: FloatNullableFilter<"Data"> | number | null
-    pressure?: StringNullableFilter<"Data"> | string | null
+    value?: FloatFilter<"Data"> | number
     description?: StringNullableFilter<"Data"> | string | null
     createdAt?: DateTimeFilter<"Data"> | Date | string
     userId?: IntFilter<"Data"> | number
@@ -7458,8 +7435,7 @@ export namespace Prisma {
   export type DataOrderByWithRelationInput = {
     id?: SortOrder
     dataType?: SortOrder
-    value?: SortOrderInput | SortOrder
-    pressure?: SortOrderInput | SortOrder
+    value?: SortOrder
     description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
@@ -7472,8 +7448,7 @@ export namespace Prisma {
     OR?: DataWhereInput[]
     NOT?: DataWhereInput | DataWhereInput[]
     dataType?: EnumDataTypeFilter<"Data"> | $Enums.DataType
-    value?: FloatNullableFilter<"Data"> | number | null
-    pressure?: StringNullableFilter<"Data"> | string | null
+    value?: FloatFilter<"Data"> | number
     description?: StringNullableFilter<"Data"> | string | null
     createdAt?: DateTimeFilter<"Data"> | Date | string
     userId?: IntFilter<"Data"> | number
@@ -7483,8 +7458,7 @@ export namespace Prisma {
   export type DataOrderByWithAggregationInput = {
     id?: SortOrder
     dataType?: SortOrder
-    value?: SortOrderInput | SortOrder
-    pressure?: SortOrderInput | SortOrder
+    value?: SortOrder
     description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
@@ -7501,8 +7475,7 @@ export namespace Prisma {
     NOT?: DataScalarWhereWithAggregatesInput | DataScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Data"> | number
     dataType?: EnumDataTypeWithAggregatesFilter<"Data"> | $Enums.DataType
-    value?: FloatNullableWithAggregatesFilter<"Data"> | number | null
-    pressure?: StringNullableWithAggregatesFilter<"Data"> | string | null
+    value?: FloatWithAggregatesFilter<"Data"> | number
     description?: StringNullableWithAggregatesFilter<"Data"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Data"> | Date | string
     userId?: IntWithAggregatesFilter<"Data"> | number
@@ -7779,8 +7752,7 @@ export namespace Prisma {
 
   export type DataCreateInput = {
     dataType: $Enums.DataType
-    value?: number | null
-    pressure?: string | null
+    value: number
     description?: string | null
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutDataInput
@@ -7789,8 +7761,7 @@ export namespace Prisma {
   export type DataUncheckedCreateInput = {
     id?: number
     dataType: $Enums.DataType
-    value?: number | null
-    pressure?: string | null
+    value: number
     description?: string | null
     createdAt?: Date | string
     userId: number
@@ -7798,8 +7769,7 @@ export namespace Prisma {
 
   export type DataUpdateInput = {
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: NullableFloatFieldUpdateOperationsInput | number | null
-    pressure?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutDataNestedInput
@@ -7808,8 +7778,7 @@ export namespace Prisma {
   export type DataUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: NullableFloatFieldUpdateOperationsInput | number | null
-    pressure?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -7818,8 +7787,7 @@ export namespace Prisma {
   export type DataCreateManyInput = {
     id?: number
     dataType: $Enums.DataType
-    value?: number | null
-    pressure?: string | null
+    value: number
     description?: string | null
     createdAt?: Date | string
     userId: number
@@ -7827,8 +7795,7 @@ export namespace Prisma {
 
   export type DataUpdateManyMutationInput = {
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: NullableFloatFieldUpdateOperationsInput | number | null
-    pressure?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7836,8 +7803,7 @@ export namespace Prisma {
   export type DataUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: NullableFloatFieldUpdateOperationsInput | number | null
-    pressure?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -8246,22 +8212,21 @@ export namespace Prisma {
     not?: NestedEnumDataTypeFilter<$PrismaModel> | $Enums.DataType
   }
 
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type DataCountOrderByAggregateInput = {
     id?: SortOrder
     dataType?: SortOrder
     value?: SortOrder
-    pressure?: SortOrder
     description?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
@@ -8277,7 +8242,6 @@ export namespace Prisma {
     id?: SortOrder
     dataType?: SortOrder
     value?: SortOrder
-    pressure?: SortOrder
     description?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
@@ -8287,7 +8251,6 @@ export namespace Prisma {
     id?: SortOrder
     dataType?: SortOrder
     value?: SortOrder
-    pressure?: SortOrder
     description?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
@@ -8309,20 +8272,20 @@ export namespace Prisma {
     _max?: NestedEnumDataTypeFilter<$PrismaModel>
   }
 
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type EnumEventTypeFilter<$PrismaModel = never> = {
@@ -8623,8 +8586,8 @@ export namespace Prisma {
     set?: $Enums.DataType
   }
 
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
     increment?: number
     decrement?: number
     multiply?: number
@@ -8854,20 +8817,20 @@ export namespace Prisma {
     _max?: NestedEnumDataTypeFilter<$PrismaModel>
   }
 
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type NestedEnumEventTypeFilter<$PrismaModel = never> = {
@@ -8911,8 +8874,7 @@ export namespace Prisma {
 
   export type DataCreateWithoutUserInput = {
     dataType: $Enums.DataType
-    value?: number | null
-    pressure?: string | null
+    value: number
     description?: string | null
     createdAt?: Date | string
   }
@@ -8920,8 +8882,7 @@ export namespace Prisma {
   export type DataUncheckedCreateWithoutUserInput = {
     id?: number
     dataType: $Enums.DataType
-    value?: number | null
-    pressure?: string | null
+    value: number
     description?: string | null
     createdAt?: Date | string
   }
@@ -9013,8 +8974,7 @@ export namespace Prisma {
     NOT?: DataScalarWhereInput | DataScalarWhereInput[]
     id?: IntFilter<"Data"> | number
     dataType?: EnumDataTypeFilter<"Data"> | $Enums.DataType
-    value?: FloatNullableFilter<"Data"> | number | null
-    pressure?: StringNullableFilter<"Data"> | string | null
+    value?: FloatFilter<"Data"> | number
     description?: StringNullableFilter<"Data"> | string | null
     createdAt?: DateTimeFilter<"Data"> | Date | string
     userId?: IntFilter<"Data"> | number
@@ -9369,8 +9329,7 @@ export namespace Prisma {
   export type DataCreateManyUserInput = {
     id?: number
     dataType: $Enums.DataType
-    value?: number | null
-    pressure?: string | null
+    value: number
     description?: string | null
     createdAt?: Date | string
   }
@@ -9405,8 +9364,7 @@ export namespace Prisma {
 
   export type DataUpdateWithoutUserInput = {
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: NullableFloatFieldUpdateOperationsInput | number | null
-    pressure?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9414,8 +9372,7 @@ export namespace Prisma {
   export type DataUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: NullableFloatFieldUpdateOperationsInput | number | null
-    pressure?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9423,8 +9380,7 @@ export namespace Prisma {
   export type DataUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: NullableFloatFieldUpdateOperationsInput | number | null
-    pressure?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
