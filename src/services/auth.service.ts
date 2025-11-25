@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-import prisma from '../utils/prisma';
+import prisma from '../prisma';
 import { User } from '../generated/prisma';
 
 const register = async (
