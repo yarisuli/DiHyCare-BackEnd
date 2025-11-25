@@ -1,13 +1,10 @@
 {
     "name": "dihycare_backend",
     "version": "1.0.0",
-    "description": "",
     "main": "src/server.ts",
     "scripts": {
         "dev": "nodemon src/server.ts",
         "start": "node src/server.ts",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "format": "prettier --write \"src/**/*.{ts,js,json}\" --ignore-unknown",
         "postinstall": "prisma generate",
         "prisma-build": "npx prisma migrate deploy",
         "prisma-dev": "npx prisma migrate dev",
@@ -15,11 +12,9 @@
         "prisma-studio": "npx prisma studio",
         "prisma-push": "npx prisma db push"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
     "dependencies": {
         "@prisma/client": "^7.0.0",
+        "prisma": "^7.0.0",
         "bcrypt": "^6.0.0",
         "body-parser": "^2.2.0",
         "consola": "^3.4.2",
@@ -41,7 +36,6 @@
         "@types/node": "^22.15.17",
         "esbuild-register": "^3.6.0",
         "nodemon": "^3.1.10",
-        "prisma": "^7.0.0",
         "typescript": "^5.8.3"
     }
 }
