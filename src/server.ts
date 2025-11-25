@@ -2,6 +2,9 @@ import app from './app';
 import { config } from 'dotenv';
 import http from 'http';
 import { consola } from 'consola';
+import "./forcePrisma";
+
+export const runtime = "node";
 
 config();
 

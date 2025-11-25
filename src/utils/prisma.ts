@@ -1,16 +1,13 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../generated/prisma/client';
 
 declare global {
-  // Evita múltiples instancias en desarrollo
   // eslint-disable-next-line no-var
   var prisma: PrismaClient | undefined;
 }
 
 const prisma =
   global.prisma ??
-  new PrismaClient({
-    adapter: "postgresql",
-  });
+  new PrismaClient();
 
 // En desarrollo guardamos la instancia globalmente
 if (process.env.NODE_ENV !== 'production') {
