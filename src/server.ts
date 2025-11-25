@@ -2,7 +2,7 @@ import app from './app';
 import { config } from 'dotenv';
 import http from 'http';
 import { consola } from 'consola';
-import "./forcePrisma";
+import prisma from './forcePrisma';
 
 export const runtime = "node";
 

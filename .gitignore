@@ -17,3 +17,4 @@ src/generated/prisma/index.js
 src/generated/prisma/package.json
 src/generated/prisma/schema.prisma
 src/generated/prisma/wasm.js
+dist/

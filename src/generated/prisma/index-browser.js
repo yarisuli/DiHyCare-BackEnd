@@ -193,8 +193,8 @@ exports.DataType = exports.$Enums.DataType = {
   CARBS: 'CARBS',
   INSULIN: 'INSULIN',
   PAS: 'PAS',
-  PAD: 'PAD',
-  HEART_RATE: 'HEART_RATE'
+  HEART_RATE: 'HEART_RATE',
+  PAD: 'PAD'
 };
 
 exports.EventType = exports.$Enums.EventType = {

@@ -58,8 +58,8 @@ export const DataType: {
   CARBS: 'CARBS',
   INSULIN: 'INSULIN',
   PAS: 'PAS',
-  PAD: 'PAD',
-  HEART_RATE: 'HEART_RATE'
+  HEART_RATE: 'HEART_RATE',
+  PAD: 'PAD'
 };
 
 export type DataType = (typeof DataType)[keyof typeof DataType]
@@ -1260,15 +1260,15 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    UserDisease: number
-    Data: number
     Calendar: number
+    Data: number
+    UserDisease: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    UserDisease?: boolean | UserCountOutputTypeCountUserDiseaseArgs
-    Data?: boolean | UserCountOutputTypeCountDataArgs
     Calendar?: boolean | UserCountOutputTypeCountCalendarArgs
+    Data?: boolean | UserCountOutputTypeCountDataArgs
+    UserDisease?: boolean | UserCountOutputTypeCountUserDiseaseArgs
   }
 
   // Custom InputTypes
@@ -1285,8 +1285,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountUserDiseaseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserDiseaseWhereInput
+  export type UserCountOutputTypeCountCalendarArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CalendarWhereInput
   }
 
   /**
@@ -1299,8 +1299,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountCalendarArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CalendarWhereInput
+  export type UserCountOutputTypeCountUserDiseaseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserDiseaseWhereInput
   }
 
 
@@ -1593,9 +1593,9 @@ export namespace Prisma {
     height?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    UserDisease?: boolean | User$UserDiseaseArgs<ExtArgs>
-    Data?: boolean | User$DataArgs<ExtArgs>
     Calendar?: boolean | User$CalendarArgs<ExtArgs>
+    Data?: boolean | User$DataArgs<ExtArgs>
+    UserDisease?: boolean | User$UserDiseaseArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1643,9 +1643,9 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "token" | "name" | "surname" | "sex" | "weight" | "height" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    UserDisease?: boolean | User$UserDiseaseArgs<ExtArgs>
-    Data?: boolean | User$DataArgs<ExtArgs>
     Calendar?: boolean | User$CalendarArgs<ExtArgs>
+    Data?: boolean | User$DataArgs<ExtArgs>
+    UserDisease?: boolean | User$UserDiseaseArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1654,9 +1654,9 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      UserDisease: Prisma.$UserDiseasePayload<ExtArgs>[]
-      Data: Prisma.$DataPayload<ExtArgs>[]
       Calendar: Prisma.$CalendarPayload<ExtArgs>[]
+      Data: Prisma.$DataPayload<ExtArgs>[]
+      UserDisease: Prisma.$UserDiseasePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2064,9 +2064,9 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    UserDisease<T extends User$UserDiseaseArgs<ExtArgs> = {}>(args?: Subset<T, User$UserDiseaseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDiseasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Data<T extends User$DataArgs<ExtArgs> = {}>(args?: Subset<T, User$DataArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Calendar<T extends User$CalendarArgs<ExtArgs> = {}>(args?: Subset<T, User$CalendarArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CalendarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Data<T extends User$DataArgs<ExtArgs> = {}>(args?: Subset<T, User$DataArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    UserDisease<T extends User$UserDiseaseArgs<ExtArgs> = {}>(args?: Subset<T, User$UserDiseaseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDiseasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2495,27 +2495,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.UserDisease
+   * User.Calendar
    */
-  export type User$UserDiseaseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$CalendarArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserDisease
+     * Select specific fields to fetch from the Calendar
      */
-    select?: UserDiseaseSelect<ExtArgs> | null
+    select?: CalendarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the UserDisease
+     * Omit specific fields from the Calendar
      */
-    omit?: UserDiseaseOmit<ExtArgs> | null
+    omit?: CalendarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserDiseaseInclude<ExtArgs> | null
-    where?: UserDiseaseWhereInput
-    orderBy?: UserDiseaseOrderByWithRelationInput | UserDiseaseOrderByWithRelationInput[]
-    cursor?: UserDiseaseWhereUniqueInput
+    include?: CalendarInclude<ExtArgs> | null
+    where?: CalendarWhereInput
+    orderBy?: CalendarOrderByWithRelationInput | CalendarOrderByWithRelationInput[]
+    cursor?: CalendarWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: UserDiseaseScalarFieldEnum | UserDiseaseScalarFieldEnum[]
+    distinct?: CalendarScalarFieldEnum | CalendarScalarFieldEnum[]
   }
 
   /**
@@ -2543,27 +2543,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.Calendar
+   * User.UserDisease
    */
-  export type User$CalendarArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$UserDiseaseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Calendar
+     * Select specific fields to fetch from the UserDisease
      */
-    select?: CalendarSelect<ExtArgs> | null
+    select?: UserDiseaseSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Calendar
+     * Omit specific fields from the UserDisease
      */
-    omit?: CalendarOmit<ExtArgs> | null
+    omit?: UserDiseaseOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CalendarInclude<ExtArgs> | null
-    where?: CalendarWhereInput
-    orderBy?: CalendarOrderByWithRelationInput | CalendarOrderByWithRelationInput[]
-    cursor?: CalendarWhereUniqueInput
+    include?: UserDiseaseInclude<ExtArgs> | null
+    where?: UserDiseaseWhereInput
+    orderBy?: UserDiseaseOrderByWithRelationInput | UserDiseaseOrderByWithRelationInput[]
+    cursor?: UserDiseaseWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: CalendarScalarFieldEnum | CalendarScalarFieldEnum[]
+    distinct?: UserDiseaseScalarFieldEnum | UserDiseaseScalarFieldEnum[]
   }
 
   /**
@@ -3857,8 +3857,8 @@ export namespace Prisma {
     diseaseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     disease?: boolean | DiseaseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userDisease"]>
 
   export type UserDiseaseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3866,8 +3866,8 @@ export namespace Prisma {
     diseaseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     disease?: boolean | DiseaseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userDisease"]>
 
   export type UserDiseaseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3875,8 +3875,8 @@ export namespace Prisma {
     diseaseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     disease?: boolean | DiseaseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userDisease"]>
 
   export type UserDiseaseSelectScalar = {
@@ -3888,23 +3888,23 @@ export namespace Prisma {
 
   export type UserDiseaseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "diseaseId" | "createdAt" | "updatedAt", ExtArgs["result"]["userDisease"]>
   export type UserDiseaseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     disease?: boolean | DiseaseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type UserDiseaseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     disease?: boolean | DiseaseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type UserDiseaseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     disease?: boolean | DiseaseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $UserDiseasePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "UserDisease"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       disease: Prisma.$DiseasePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       userId: number
@@ -4305,8 +4305,8 @@ export namespace Prisma {
    */
   export interface Prisma__UserDiseaseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     disease<T extends DiseaseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DiseaseDefaultArgs<ExtArgs>>): Prisma__DiseaseClient<$Result.GetResult<Prisma.$DiseasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7223,9 +7223,9 @@ export namespace Prisma {
     height?: IntNullableFilter<"User"> | number | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    UserDisease?: UserDiseaseListRelationFilter
-    Data?: DataListRelationFilter
     Calendar?: CalendarListRelationFilter
+    Data?: DataListRelationFilter
+    UserDisease?: UserDiseaseListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -7240,9 +7240,9 @@ export namespace Prisma {
     height?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    UserDisease?: UserDiseaseOrderByRelationAggregateInput
-    Data?: DataOrderByRelationAggregateInput
     Calendar?: CalendarOrderByRelationAggregateInput
+    Data?: DataOrderByRelationAggregateInput
+    UserDisease?: UserDiseaseOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -7260,9 +7260,9 @@ export namespace Prisma {
     height?: IntNullableFilter<"User"> | number | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    UserDisease?: UserDiseaseListRelationFilter
-    Data?: DataListRelationFilter
     Calendar?: CalendarListRelationFilter
+    Data?: DataListRelationFilter
+    UserDisease?: UserDiseaseListRelationFilter
   }, "id" | "email" | "token">
 
   export type UserOrderByWithAggregationInput = {
@@ -7356,8 +7356,8 @@ export namespace Prisma {
     diseaseId?: IntFilter<"UserDisease"> | number
     createdAt?: DateTimeFilter<"UserDisease"> | Date | string
     updatedAt?: DateTimeFilter<"UserDisease"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     disease?: XOR<DiseaseScalarRelationFilter, DiseaseWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type UserDiseaseOrderByWithRelationInput = {
@@ -7365,8 +7365,8 @@ export namespace Prisma {
     diseaseId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
     disease?: DiseaseOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type UserDiseaseWhereUniqueInput = Prisma.AtLeast<{
@@ -7378,8 +7378,8 @@ export namespace Prisma {
     diseaseId?: IntFilter<"UserDisease"> | number
     createdAt?: DateTimeFilter<"UserDisease"> | Date | string
     updatedAt?: DateTimeFilter<"UserDisease"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     disease?: XOR<DiseaseScalarRelationFilter, DiseaseWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "userId_diseaseId">
 
   export type UserDiseaseOrderByWithAggregationInput = {
@@ -7549,9 +7549,9 @@ export namespace Prisma {
     height?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    UserDisease?: UserDiseaseCreateNestedManyWithoutUserInput
-    Data?: DataCreateNestedManyWithoutUserInput
     Calendar?: CalendarCreateNestedManyWithoutUserInput
+    Data?: DataCreateNestedManyWithoutUserInput
+    UserDisease?: UserDiseaseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7566,9 +7566,9 @@ export namespace Prisma {
     height?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    UserDisease?: UserDiseaseUncheckedCreateNestedManyWithoutUserInput
-    Data?: DataUncheckedCreateNestedManyWithoutUserInput
     Calendar?: CalendarUncheckedCreateNestedManyWithoutUserInput
+    Data?: DataUncheckedCreateNestedManyWithoutUserInput
+    UserDisease?: UserDiseaseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -7582,9 +7582,9 @@ export namespace Prisma {
     height?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    UserDisease?: UserDiseaseUpdateManyWithoutUserNestedInput
-    Data?: DataUpdateManyWithoutUserNestedInput
     Calendar?: CalendarUpdateManyWithoutUserNestedInput
+    Data?: DataUpdateManyWithoutUserNestedInput
+    UserDisease?: UserDiseaseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -7599,9 +7599,9 @@ export namespace Prisma {
     height?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    UserDisease?: UserDiseaseUncheckedUpdateManyWithoutUserNestedInput
-    Data?: DataUncheckedUpdateManyWithoutUserNestedInput
     Calendar?: CalendarUncheckedUpdateManyWithoutUserNestedInput
+    Data?: DataUncheckedUpdateManyWithoutUserNestedInput
+    UserDisease?: UserDiseaseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -7691,8 +7691,8 @@ export namespace Prisma {
   export type UserDiseaseCreateInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutUserDiseaseInput
     disease: DiseaseCreateNestedOneWithoutUserDiseaseInput
+    user: UserCreateNestedOneWithoutUserDiseaseInput
   }
 
   export type UserDiseaseUncheckedCreateInput = {
@@ -7705,8 +7705,8 @@ export namespace Prisma {
   export type UserDiseaseUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutUserDiseaseNestedInput
     disease?: DiseaseUpdateOneRequiredWithoutUserDiseaseNestedInput
+    user?: UserUpdateOneRequiredWithoutUserDiseaseNestedInput
   }
 
   export type UserDiseaseUncheckedUpdateInput = {
@@ -7937,10 +7937,10 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type UserDiseaseListRelationFilter = {
-    every?: UserDiseaseWhereInput
-    some?: UserDiseaseWhereInput
-    none?: UserDiseaseWhereInput
+  export type CalendarListRelationFilter = {
+    every?: CalendarWhereInput
+    some?: CalendarWhereInput
+    none?: CalendarWhereInput
   }
 
   export type DataListRelationFilter = {
@@ -7949,10 +7949,10 @@ export namespace Prisma {
     none?: DataWhereInput
   }
 
-  export type CalendarListRelationFilter = {
-    every?: CalendarWhereInput
-    some?: CalendarWhereInput
-    none?: CalendarWhereInput
+  export type UserDiseaseListRelationFilter = {
+    every?: UserDiseaseWhereInput
+    some?: UserDiseaseWhereInput
+    none?: UserDiseaseWhereInput
   }
 
   export type SortOrderInput = {
@@ -7960,7 +7960,7 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type UserDiseaseOrderByRelationAggregateInput = {
+  export type CalendarOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7968,7 +7968,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type CalendarOrderByRelationAggregateInput = {
+  export type UserDiseaseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8144,14 +8144,14 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
   export type DiseaseScalarRelationFilter = {
     is?: DiseaseWhereInput
     isNot?: DiseaseWhereInput
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
   }
 
   export type UserDiseaseUserIdDiseaseIdCompoundUniqueInput = {
@@ -8333,11 +8333,11 @@ export namespace Prisma {
     _max?: NestedEnumEventTypeFilter<$PrismaModel>
   }
 
-  export type UserDiseaseCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserDiseaseCreateWithoutUserInput, UserDiseaseUncheckedCreateWithoutUserInput> | UserDiseaseCreateWithoutUserInput[] | UserDiseaseUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserDiseaseCreateOrConnectWithoutUserInput | UserDiseaseCreateOrConnectWithoutUserInput[]
-    createMany?: UserDiseaseCreateManyUserInputEnvelope
-    connect?: UserDiseaseWhereUniqueInput | UserDiseaseWhereUniqueInput[]
+  export type CalendarCreateNestedManyWithoutUserInput = {
+    create?: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput> | CalendarCreateWithoutUserInput[] | CalendarUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CalendarCreateOrConnectWithoutUserInput | CalendarCreateOrConnectWithoutUserInput[]
+    createMany?: CalendarCreateManyUserInputEnvelope
+    connect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
   }
 
   export type DataCreateNestedManyWithoutUserInput = {
@@ -8347,18 +8347,18 @@ export namespace Prisma {
     connect?: DataWhereUniqueInput | DataWhereUniqueInput[]
   }
 
-  export type CalendarCreateNestedManyWithoutUserInput = {
-    create?: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput> | CalendarCreateWithoutUserInput[] | CalendarUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CalendarCreateOrConnectWithoutUserInput | CalendarCreateOrConnectWithoutUserInput[]
-    createMany?: CalendarCreateManyUserInputEnvelope
-    connect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
-  }
-
-  export type UserDiseaseUncheckedCreateNestedManyWithoutUserInput = {
+  export type UserDiseaseCreateNestedManyWithoutUserInput = {
     create?: XOR<UserDiseaseCreateWithoutUserInput, UserDiseaseUncheckedCreateWithoutUserInput> | UserDiseaseCreateWithoutUserInput[] | UserDiseaseUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserDiseaseCreateOrConnectWithoutUserInput | UserDiseaseCreateOrConnectWithoutUserInput[]
     createMany?: UserDiseaseCreateManyUserInputEnvelope
     connect?: UserDiseaseWhereUniqueInput | UserDiseaseWhereUniqueInput[]
+  }
+
+  export type CalendarUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput> | CalendarCreateWithoutUserInput[] | CalendarUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CalendarCreateOrConnectWithoutUserInput | CalendarCreateOrConnectWithoutUserInput[]
+    createMany?: CalendarCreateManyUserInputEnvelope
+    connect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
   }
 
   export type DataUncheckedCreateNestedManyWithoutUserInput = {
@@ -8368,11 +8368,11 @@ export namespace Prisma {
     connect?: DataWhereUniqueInput | DataWhereUniqueInput[]
   }
 
-  export type CalendarUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput> | CalendarCreateWithoutUserInput[] | CalendarUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CalendarCreateOrConnectWithoutUserInput | CalendarCreateOrConnectWithoutUserInput[]
-    createMany?: CalendarCreateManyUserInputEnvelope
-    connect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+  export type UserDiseaseUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserDiseaseCreateWithoutUserInput, UserDiseaseUncheckedCreateWithoutUserInput> | UserDiseaseCreateWithoutUserInput[] | UserDiseaseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserDiseaseCreateOrConnectWithoutUserInput | UserDiseaseCreateOrConnectWithoutUserInput[]
+    createMany?: UserDiseaseCreateManyUserInputEnvelope
+    connect?: UserDiseaseWhereUniqueInput | UserDiseaseWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8399,18 +8399,18 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type UserDiseaseUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserDiseaseCreateWithoutUserInput, UserDiseaseUncheckedCreateWithoutUserInput> | UserDiseaseCreateWithoutUserInput[] | UserDiseaseUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserDiseaseCreateOrConnectWithoutUserInput | UserDiseaseCreateOrConnectWithoutUserInput[]
-    upsert?: UserDiseaseUpsertWithWhereUniqueWithoutUserInput | UserDiseaseUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserDiseaseCreateManyUserInputEnvelope
-    set?: UserDiseaseWhereUniqueInput | UserDiseaseWhereUniqueInput[]
-    disconnect?: UserDiseaseWhereUniqueInput | UserDiseaseWhereUniqueInput[]
-    delete?: UserDiseaseWhereUniqueInput | UserDiseaseWhereUniqueInput[]
-    connect?: UserDiseaseWhereUniqueInput | UserDiseaseWhereUniqueInput[]
-    update?: UserDiseaseUpdateWithWhereUniqueWithoutUserInput | UserDiseaseUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserDiseaseUpdateManyWithWhereWithoutUserInput | UserDiseaseUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserDiseaseScalarWhereInput | UserDiseaseScalarWhereInput[]
+  export type CalendarUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput> | CalendarCreateWithoutUserInput[] | CalendarUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CalendarCreateOrConnectWithoutUserInput | CalendarCreateOrConnectWithoutUserInput[]
+    upsert?: CalendarUpsertWithWhereUniqueWithoutUserInput | CalendarUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CalendarCreateManyUserInputEnvelope
+    set?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    disconnect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    delete?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    connect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    update?: CalendarUpdateWithWhereUniqueWithoutUserInput | CalendarUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CalendarUpdateManyWithWhereWithoutUserInput | CalendarUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CalendarScalarWhereInput | CalendarScalarWhereInput[]
   }
 
   export type DataUpdateManyWithoutUserNestedInput = {
@@ -8427,29 +8427,7 @@ export namespace Prisma {
     deleteMany?: DataScalarWhereInput | DataScalarWhereInput[]
   }
 
-  export type CalendarUpdateManyWithoutUserNestedInput = {
-    create?: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput> | CalendarCreateWithoutUserInput[] | CalendarUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CalendarCreateOrConnectWithoutUserInput | CalendarCreateOrConnectWithoutUserInput[]
-    upsert?: CalendarUpsertWithWhereUniqueWithoutUserInput | CalendarUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: CalendarCreateManyUserInputEnvelope
-    set?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
-    disconnect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
-    delete?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
-    connect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
-    update?: CalendarUpdateWithWhereUniqueWithoutUserInput | CalendarUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: CalendarUpdateManyWithWhereWithoutUserInput | CalendarUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: CalendarScalarWhereInput | CalendarScalarWhereInput[]
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type UserDiseaseUncheckedUpdateManyWithoutUserNestedInput = {
+  export type UserDiseaseUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserDiseaseCreateWithoutUserInput, UserDiseaseUncheckedCreateWithoutUserInput> | UserDiseaseCreateWithoutUserInput[] | UserDiseaseUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserDiseaseCreateOrConnectWithoutUserInput | UserDiseaseCreateOrConnectWithoutUserInput[]
     upsert?: UserDiseaseUpsertWithWhereUniqueWithoutUserInput | UserDiseaseUpsertWithWhereUniqueWithoutUserInput[]
@@ -8461,6 +8439,28 @@ export namespace Prisma {
     update?: UserDiseaseUpdateWithWhereUniqueWithoutUserInput | UserDiseaseUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserDiseaseUpdateManyWithWhereWithoutUserInput | UserDiseaseUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserDiseaseScalarWhereInput | UserDiseaseScalarWhereInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type CalendarUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput> | CalendarCreateWithoutUserInput[] | CalendarUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CalendarCreateOrConnectWithoutUserInput | CalendarCreateOrConnectWithoutUserInput[]
+    upsert?: CalendarUpsertWithWhereUniqueWithoutUserInput | CalendarUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CalendarCreateManyUserInputEnvelope
+    set?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    disconnect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    delete?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    connect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
+    update?: CalendarUpdateWithWhereUniqueWithoutUserInput | CalendarUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CalendarUpdateManyWithWhereWithoutUserInput | CalendarUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CalendarScalarWhereInput | CalendarScalarWhereInput[]
   }
 
   export type DataUncheckedUpdateManyWithoutUserNestedInput = {
@@ -8477,18 +8477,18 @@ export namespace Prisma {
     deleteMany?: DataScalarWhereInput | DataScalarWhereInput[]
   }
 
-  export type CalendarUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<CalendarCreateWithoutUserInput, CalendarUncheckedCreateWithoutUserInput> | CalendarCreateWithoutUserInput[] | CalendarUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CalendarCreateOrConnectWithoutUserInput | CalendarCreateOrConnectWithoutUserInput[]
-    upsert?: CalendarUpsertWithWhereUniqueWithoutUserInput | CalendarUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: CalendarCreateManyUserInputEnvelope
-    set?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
-    disconnect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
-    delete?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
-    connect?: CalendarWhereUniqueInput | CalendarWhereUniqueInput[]
-    update?: CalendarUpdateWithWhereUniqueWithoutUserInput | CalendarUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: CalendarUpdateManyWithWhereWithoutUserInput | CalendarUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: CalendarScalarWhereInput | CalendarScalarWhereInput[]
+  export type UserDiseaseUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserDiseaseCreateWithoutUserInput, UserDiseaseUncheckedCreateWithoutUserInput> | UserDiseaseCreateWithoutUserInput[] | UserDiseaseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserDiseaseCreateOrConnectWithoutUserInput | UserDiseaseCreateOrConnectWithoutUserInput[]
+    upsert?: UserDiseaseUpsertWithWhereUniqueWithoutUserInput | UserDiseaseUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserDiseaseCreateManyUserInputEnvelope
+    set?: UserDiseaseWhereUniqueInput | UserDiseaseWhereUniqueInput[]
+    disconnect?: UserDiseaseWhereUniqueInput | UserDiseaseWhereUniqueInput[]
+    delete?: UserDiseaseWhereUniqueInput | UserDiseaseWhereUniqueInput[]
+    connect?: UserDiseaseWhereUniqueInput | UserDiseaseWhereUniqueInput[]
+    update?: UserDiseaseUpdateWithWhereUniqueWithoutUserInput | UserDiseaseUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserDiseaseUpdateManyWithWhereWithoutUserInput | UserDiseaseUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserDiseaseScalarWhereInput | UserDiseaseScalarWhereInput[]
   }
 
   export type UserDiseaseCreateNestedManyWithoutDiseaseInput = {
@@ -8533,24 +8533,16 @@ export namespace Prisma {
     deleteMany?: UserDiseaseScalarWhereInput | UserDiseaseScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutUserDiseaseInput = {
-    create?: XOR<UserCreateWithoutUserDiseaseInput, UserUncheckedCreateWithoutUserDiseaseInput>
-    connectOrCreate?: UserCreateOrConnectWithoutUserDiseaseInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type DiseaseCreateNestedOneWithoutUserDiseaseInput = {
     create?: XOR<DiseaseCreateWithoutUserDiseaseInput, DiseaseUncheckedCreateWithoutUserDiseaseInput>
     connectOrCreate?: DiseaseCreateOrConnectWithoutUserDiseaseInput
     connect?: DiseaseWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutUserDiseaseNestedInput = {
+  export type UserCreateNestedOneWithoutUserDiseaseInput = {
     create?: XOR<UserCreateWithoutUserDiseaseInput, UserUncheckedCreateWithoutUserDiseaseInput>
     connectOrCreate?: UserCreateOrConnectWithoutUserDiseaseInput
-    upsert?: UserUpsertWithoutUserDiseaseInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserDiseaseInput, UserUpdateWithoutUserDiseaseInput>, UserUncheckedUpdateWithoutUserDiseaseInput>
   }
 
   export type DiseaseUpdateOneRequiredWithoutUserDiseaseNestedInput = {
@@ -8559,6 +8551,14 @@ export namespace Prisma {
     upsert?: DiseaseUpsertWithoutUserDiseaseInput
     connect?: DiseaseWhereUniqueInput
     update?: XOR<XOR<DiseaseUpdateToOneWithWhereWithoutUserDiseaseInput, DiseaseUpdateWithoutUserDiseaseInput>, DiseaseUncheckedUpdateWithoutUserDiseaseInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutUserDiseaseNestedInput = {
+    create?: XOR<UserCreateWithoutUserDiseaseInput, UserUncheckedCreateWithoutUserDiseaseInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserDiseaseInput
+    upsert?: UserUpsertWithoutUserDiseaseInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserDiseaseInput, UserUpdateWithoutUserDiseaseInput>, UserUncheckedUpdateWithoutUserDiseaseInput>
   }
 
   export type UserCreateNestedOneWithoutDataInput = {
@@ -8835,53 +8835,6 @@ export namespace Prisma {
     _max?: NestedEnumEventTypeFilter<$PrismaModel>
   }
 
-  export type UserDiseaseCreateWithoutUserInput = {
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    disease: DiseaseCreateNestedOneWithoutUserDiseaseInput
-  }
-
-  export type UserDiseaseUncheckedCreateWithoutUserInput = {
-    diseaseId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserDiseaseCreateOrConnectWithoutUserInput = {
-    where: UserDiseaseWhereUniqueInput
-    create: XOR<UserDiseaseCreateWithoutUserInput, UserDiseaseUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserDiseaseCreateManyUserInputEnvelope = {
-    data: UserDiseaseCreateManyUserInput | UserDiseaseCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type DataCreateWithoutUserInput = {
-    dataType: $Enums.DataType
-    value: number
-    description?: string | null
-    createdAt?: Date | string
-  }
-
-  export type DataUncheckedCreateWithoutUserInput = {
-    id?: number
-    dataType: $Enums.DataType
-    value: number
-    description?: string | null
-    createdAt?: Date | string
-  }
-
-  export type DataCreateOrConnectWithoutUserInput = {
-    where: DataWhereUniqueInput
-    create: XOR<DataCreateWithoutUserInput, DataUncheckedCreateWithoutUserInput>
-  }
-
-  export type DataCreateManyUserInputEnvelope = {
-    data: DataCreateManyUserInput | DataCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type CalendarCreateWithoutUserInput = {
     event: string
     description?: string | null
@@ -8911,58 +8864,51 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserDiseaseUpsertWithWhereUniqueWithoutUserInput = {
-    where: UserDiseaseWhereUniqueInput
-    update: XOR<UserDiseaseUpdateWithoutUserInput, UserDiseaseUncheckedUpdateWithoutUserInput>
-    create: XOR<UserDiseaseCreateWithoutUserInput, UserDiseaseUncheckedCreateWithoutUserInput>
+  export type DataCreateWithoutUserInput = {
+    dataType: $Enums.DataType
+    value: number
+    description?: string | null
+    createdAt?: Date | string
   }
 
-  export type UserDiseaseUpdateWithWhereUniqueWithoutUserInput = {
-    where: UserDiseaseWhereUniqueInput
-    data: XOR<UserDiseaseUpdateWithoutUserInput, UserDiseaseUncheckedUpdateWithoutUserInput>
+  export type DataUncheckedCreateWithoutUserInput = {
+    id?: number
+    dataType: $Enums.DataType
+    value: number
+    description?: string | null
+    createdAt?: Date | string
   }
 
-  export type UserDiseaseUpdateManyWithWhereWithoutUserInput = {
-    where: UserDiseaseScalarWhereInput
-    data: XOR<UserDiseaseUpdateManyMutationInput, UserDiseaseUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type UserDiseaseScalarWhereInput = {
-    AND?: UserDiseaseScalarWhereInput | UserDiseaseScalarWhereInput[]
-    OR?: UserDiseaseScalarWhereInput[]
-    NOT?: UserDiseaseScalarWhereInput | UserDiseaseScalarWhereInput[]
-    userId?: IntFilter<"UserDisease"> | number
-    diseaseId?: IntFilter<"UserDisease"> | number
-    createdAt?: DateTimeFilter<"UserDisease"> | Date | string
-    updatedAt?: DateTimeFilter<"UserDisease"> | Date | string
-  }
-
-  export type DataUpsertWithWhereUniqueWithoutUserInput = {
+  export type DataCreateOrConnectWithoutUserInput = {
     where: DataWhereUniqueInput
-    update: XOR<DataUpdateWithoutUserInput, DataUncheckedUpdateWithoutUserInput>
     create: XOR<DataCreateWithoutUserInput, DataUncheckedCreateWithoutUserInput>
   }
 
-  export type DataUpdateWithWhereUniqueWithoutUserInput = {
-    where: DataWhereUniqueInput
-    data: XOR<DataUpdateWithoutUserInput, DataUncheckedUpdateWithoutUserInput>
+  export type DataCreateManyUserInputEnvelope = {
+    data: DataCreateManyUserInput | DataCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
-  export type DataUpdateManyWithWhereWithoutUserInput = {
-    where: DataScalarWhereInput
-    data: XOR<DataUpdateManyMutationInput, DataUncheckedUpdateManyWithoutUserInput>
+  export type UserDiseaseCreateWithoutUserInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    disease: DiseaseCreateNestedOneWithoutUserDiseaseInput
   }
 
-  export type DataScalarWhereInput = {
-    AND?: DataScalarWhereInput | DataScalarWhereInput[]
-    OR?: DataScalarWhereInput[]
-    NOT?: DataScalarWhereInput | DataScalarWhereInput[]
-    id?: IntFilter<"Data"> | number
-    dataType?: EnumDataTypeFilter<"Data"> | $Enums.DataType
-    value?: FloatFilter<"Data"> | number
-    description?: StringNullableFilter<"Data"> | string | null
-    createdAt?: DateTimeFilter<"Data"> | Date | string
-    userId?: IntFilter<"Data"> | number
+  export type UserDiseaseUncheckedCreateWithoutUserInput = {
+    diseaseId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDiseaseCreateOrConnectWithoutUserInput = {
+    where: UserDiseaseWhereUniqueInput
+    create: XOR<UserDiseaseCreateWithoutUserInput, UserDiseaseUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserDiseaseCreateManyUserInputEnvelope = {
+    data: UserDiseaseCreateManyUserInput | UserDiseaseCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type CalendarUpsertWithWhereUniqueWithoutUserInput = {
@@ -8993,6 +8939,60 @@ export namespace Prisma {
     userId?: IntFilter<"Calendar"> | number
     createdAt?: DateTimeFilter<"Calendar"> | Date | string
     updatedAt?: DateTimeFilter<"Calendar"> | Date | string
+  }
+
+  export type DataUpsertWithWhereUniqueWithoutUserInput = {
+    where: DataWhereUniqueInput
+    update: XOR<DataUpdateWithoutUserInput, DataUncheckedUpdateWithoutUserInput>
+    create: XOR<DataCreateWithoutUserInput, DataUncheckedCreateWithoutUserInput>
+  }
+
+  export type DataUpdateWithWhereUniqueWithoutUserInput = {
+    where: DataWhereUniqueInput
+    data: XOR<DataUpdateWithoutUserInput, DataUncheckedUpdateWithoutUserInput>
+  }
+
+  export type DataUpdateManyWithWhereWithoutUserInput = {
+    where: DataScalarWhereInput
+    data: XOR<DataUpdateManyMutationInput, DataUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type DataScalarWhereInput = {
+    AND?: DataScalarWhereInput | DataScalarWhereInput[]
+    OR?: DataScalarWhereInput[]
+    NOT?: DataScalarWhereInput | DataScalarWhereInput[]
+    id?: IntFilter<"Data"> | number
+    dataType?: EnumDataTypeFilter<"Data"> | $Enums.DataType
+    value?: FloatFilter<"Data"> | number
+    description?: StringNullableFilter<"Data"> | string | null
+    createdAt?: DateTimeFilter<"Data"> | Date | string
+    userId?: IntFilter<"Data"> | number
+  }
+
+  export type UserDiseaseUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserDiseaseWhereUniqueInput
+    update: XOR<UserDiseaseUpdateWithoutUserInput, UserDiseaseUncheckedUpdateWithoutUserInput>
+    create: XOR<UserDiseaseCreateWithoutUserInput, UserDiseaseUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserDiseaseUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserDiseaseWhereUniqueInput
+    data: XOR<UserDiseaseUpdateWithoutUserInput, UserDiseaseUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserDiseaseUpdateManyWithWhereWithoutUserInput = {
+    where: UserDiseaseScalarWhereInput
+    data: XOR<UserDiseaseUpdateManyMutationInput, UserDiseaseUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserDiseaseScalarWhereInput = {
+    AND?: UserDiseaseScalarWhereInput | UserDiseaseScalarWhereInput[]
+    OR?: UserDiseaseScalarWhereInput[]
+    NOT?: UserDiseaseScalarWhereInput | UserDiseaseScalarWhereInput[]
+    userId?: IntFilter<"UserDisease"> | number
+    diseaseId?: IntFilter<"UserDisease"> | number
+    createdAt?: DateTimeFilter<"UserDisease"> | Date | string
+    updatedAt?: DateTimeFilter<"UserDisease"> | Date | string
   }
 
   export type UserDiseaseCreateWithoutDiseaseInput = {
@@ -9033,42 +9033,6 @@ export namespace Prisma {
     data: XOR<UserDiseaseUpdateManyMutationInput, UserDiseaseUncheckedUpdateManyWithoutDiseaseInput>
   }
 
-  export type UserCreateWithoutUserDiseaseInput = {
-    email: string
-    password: string
-    token?: string | null
-    name: string
-    surname: string
-    sex?: $Enums.Sex | null
-    weight?: number | null
-    height?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Data?: DataCreateNestedManyWithoutUserInput
-    Calendar?: CalendarCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutUserDiseaseInput = {
-    id?: number
-    email: string
-    password: string
-    token?: string | null
-    name: string
-    surname: string
-    sex?: $Enums.Sex | null
-    weight?: number | null
-    height?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Data?: DataUncheckedCreateNestedManyWithoutUserInput
-    Calendar?: CalendarUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutUserDiseaseInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutUserDiseaseInput, UserUncheckedCreateWithoutUserDiseaseInput>
-  }
-
   export type DiseaseCreateWithoutUserDiseaseInput = {
     diseaseName: string
     diseaseType: string
@@ -9085,46 +9049,40 @@ export namespace Prisma {
     create: XOR<DiseaseCreateWithoutUserDiseaseInput, DiseaseUncheckedCreateWithoutUserDiseaseInput>
   }
 
-  export type UserUpsertWithoutUserDiseaseInput = {
-    update: XOR<UserUpdateWithoutUserDiseaseInput, UserUncheckedUpdateWithoutUserDiseaseInput>
+  export type UserCreateWithoutUserDiseaseInput = {
+    email: string
+    password: string
+    token?: string | null
+    name: string
+    surname: string
+    sex?: $Enums.Sex | null
+    weight?: number | null
+    height?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Calendar?: CalendarCreateNestedManyWithoutUserInput
+    Data?: DataCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUserDiseaseInput = {
+    id?: number
+    email: string
+    password: string
+    token?: string | null
+    name: string
+    surname: string
+    sex?: $Enums.Sex | null
+    weight?: number | null
+    height?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Calendar?: CalendarUncheckedCreateNestedManyWithoutUserInput
+    Data?: DataUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUserDiseaseInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutUserDiseaseInput, UserUncheckedCreateWithoutUserDiseaseInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutUserDiseaseInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutUserDiseaseInput, UserUncheckedUpdateWithoutUserDiseaseInput>
-  }
-
-  export type UserUpdateWithoutUserDiseaseInput = {
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    surname?: StringFieldUpdateOperationsInput | string
-    sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
-    weight?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Data?: DataUpdateManyWithoutUserNestedInput
-    Calendar?: CalendarUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutUserDiseaseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    token?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    surname?: StringFieldUpdateOperationsInput | string
-    sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
-    weight?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Data?: DataUncheckedUpdateManyWithoutUserNestedInput
-    Calendar?: CalendarUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DiseaseUpsertWithoutUserDiseaseInput = {
@@ -9149,6 +9107,48 @@ export namespace Prisma {
     diseaseType?: StringFieldUpdateOperationsInput | string
   }
 
+  export type UserUpsertWithoutUserDiseaseInput = {
+    update: XOR<UserUpdateWithoutUserDiseaseInput, UserUncheckedUpdateWithoutUserDiseaseInput>
+    create: XOR<UserCreateWithoutUserDiseaseInput, UserUncheckedCreateWithoutUserDiseaseInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUserDiseaseInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUserDiseaseInput, UserUncheckedUpdateWithoutUserDiseaseInput>
+  }
+
+  export type UserUpdateWithoutUserDiseaseInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
+    sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+    weight?: NullableIntFieldUpdateOperationsInput | number | null
+    height?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Calendar?: CalendarUpdateManyWithoutUserNestedInput
+    Data?: DataUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUserDiseaseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    surname?: StringFieldUpdateOperationsInput | string
+    sex?: NullableEnumSexFieldUpdateOperationsInput | $Enums.Sex | null
+    weight?: NullableIntFieldUpdateOperationsInput | number | null
+    height?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Calendar?: CalendarUncheckedUpdateManyWithoutUserNestedInput
+    Data?: DataUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type UserCreateWithoutDataInput = {
     email: string
     password: string
@@ -9160,8 +9160,8 @@ export namespace Prisma {
     height?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    UserDisease?: UserDiseaseCreateNestedManyWithoutUserInput
     Calendar?: CalendarCreateNestedManyWithoutUserInput
+    UserDisease?: UserDiseaseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDataInput = {
@@ -9176,8 +9176,8 @@ export namespace Prisma {
     height?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    UserDisease?: UserDiseaseUncheckedCreateNestedManyWithoutUserInput
     Calendar?: CalendarUncheckedCreateNestedManyWithoutUserInput
+    UserDisease?: UserDiseaseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDataInput = {
@@ -9207,8 +9207,8 @@ export namespace Prisma {
     height?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    UserDisease?: UserDiseaseUpdateManyWithoutUserNestedInput
     Calendar?: CalendarUpdateManyWithoutUserNestedInput
+    UserDisease?: UserDiseaseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDataInput = {
@@ -9223,8 +9223,8 @@ export namespace Prisma {
     height?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    UserDisease?: UserDiseaseUncheckedUpdateManyWithoutUserNestedInput
     Calendar?: CalendarUncheckedUpdateManyWithoutUserNestedInput
+    UserDisease?: UserDiseaseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCalendarInput = {
@@ -9238,8 +9238,8 @@ export namespace Prisma {
     height?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    UserDisease?: UserDiseaseCreateNestedManyWithoutUserInput
     Data?: DataCreateNestedManyWithoutUserInput
+    UserDisease?: UserDiseaseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCalendarInput = {
@@ -9254,8 +9254,8 @@ export namespace Prisma {
     height?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    UserDisease?: UserDiseaseUncheckedCreateNestedManyWithoutUserInput
     Data?: DataUncheckedCreateNestedManyWithoutUserInput
+    UserDisease?: UserDiseaseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCalendarInput = {
@@ -9285,8 +9285,8 @@ export namespace Prisma {
     height?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    UserDisease?: UserDiseaseUpdateManyWithoutUserNestedInput
     Data?: DataUpdateManyWithoutUserNestedInput
+    UserDisease?: UserDiseaseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCalendarInput = {
@@ -9301,22 +9301,8 @@ export namespace Prisma {
     height?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    UserDisease?: UserDiseaseUncheckedUpdateManyWithoutUserNestedInput
     Data?: DataUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserDiseaseCreateManyUserInput = {
-    diseaseId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DataCreateManyUserInput = {
-    id?: number
-    dataType: $Enums.DataType
-    value: number
-    description?: string | null
-    createdAt?: Date | string
+    UserDisease?: UserDiseaseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CalendarCreateManyUserInput = {
@@ -9329,45 +9315,18 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type UserDiseaseUpdateWithoutUserInput = {
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    disease?: DiseaseUpdateOneRequiredWithoutUserDiseaseNestedInput
+  export type DataCreateManyUserInput = {
+    id?: number
+    dataType: $Enums.DataType
+    value: number
+    description?: string | null
+    createdAt?: Date | string
   }
 
-  export type UserDiseaseUncheckedUpdateWithoutUserInput = {
-    diseaseId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserDiseaseUncheckedUpdateManyWithoutUserInput = {
-    diseaseId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DataUpdateWithoutUserInput = {
-    dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: FloatFieldUpdateOperationsInput | number
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DataUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: FloatFieldUpdateOperationsInput | number
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DataUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
-    value?: FloatFieldUpdateOperationsInput | number
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type UserDiseaseCreateManyUserInput = {
+    diseaseId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CalendarUpdateWithoutUserInput = {
@@ -9395,6 +9354,47 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataUpdateWithoutUserInput = {
+    dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
+    value?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
+    value?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dataType?: EnumDataTypeFieldUpdateOperationsInput | $Enums.DataType
+    value?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDiseaseUpdateWithoutUserInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    disease?: DiseaseUpdateOneRequiredWithoutUserDiseaseNestedInput
+  }
+
+  export type UserDiseaseUncheckedUpdateWithoutUserInput = {
+    diseaseId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDiseaseUncheckedUpdateManyWithoutUserInput = {
+    diseaseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
