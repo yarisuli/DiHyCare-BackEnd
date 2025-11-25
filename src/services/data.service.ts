@@ -65,7 +65,7 @@ const getWeeklyAverageGlucose = async (
   }
 
   // agrupar por día (YYYY-MM-DD)
-  entries.forEach((e) => {
+  entries.forEach((e: Data) => {
     const key = e.createdAt.toISOString().split('T')[0];
     if (grouped[key]) grouped[key].push(Number(e.value));
   });
@@ -129,12 +129,12 @@ const getWeeklyAveragePressure = async (
   }
 
   // Agrupar valores por día
-  entriesPAS.forEach((e) => {
+  entriesPAS.forEach((e: Data) => {
     const key = e.createdAt.toISOString().split('T')[0];
     if (groupedPAS[key]) groupedPAS[key].push(Number(e.value));
   });
 
-  entriesPAD.forEach((e) => {
+  entriesPAD.forEach((e: Data) => {
     const key = e.createdAt.toISOString().split('T')[0];
     if (groupedPAD[key]) groupedPAD[key].push(Number(e.value));
   });
