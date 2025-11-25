@@ -87,14 +87,23 @@ const updateEvent = async (req: Request, res: Response) => {
 //delete evento
 const deleteEvent = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params['id']);
-    await calendarService.deleteEvent(id);
+    const eventId = parseInt(req.params['id'], 10);
+    if (isNaN(eventId)) return res.status(400).json({ error: 'Invalid event ID' });
+
+    const userId = Number(res.locals.userId);
+    console.debug('deleteEvent request:', { eventId, tokenUserId: userId, reqParams: req.params, originalUrl: req.originalUrl });
+
+    const existing = await calendarService.getEventById(eventId);
+    console.debug('deleteEvent existing:', existing);
+
+    if (!existing) return res.status(404).json({ message: 'Event not found.' });
+    if (existing.userId !== userId) return res.status(403).json({ message: 'Forbidden' });
+
+    await calendarService.deleteEvent(eventId);
     return res.status(200).json({ message: 'Event deleted successfully.' });
   } catch (error: any) {
-    return res.status(500).json({
-      message: 'Error at deleting event.',
-      error: error.message
-    });
+    console.error('Error deleting event:', error);
+    return res.status(500).json({ message: 'Error at deleting event.', error: error.message });
   }
 };
 
