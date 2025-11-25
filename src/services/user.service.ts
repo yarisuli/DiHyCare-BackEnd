@@ -1,6 +1,6 @@
 import { get } from 'http';
 import { User } from '../generated/prisma';
-import prisma from '../utils/prisma.server';
+import prisma from '../utils/prisma';
 // import { Author } from "../types/generalTypes";
 
 //get todos los usuarios

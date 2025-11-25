@@ -1,5 +1,5 @@
 import { Calendar } from '../generated/prisma';
-import prisma from '../utils/prisma.server';
+import prisma from '../utils/prisma';
 
 // get todos los eventos
 const getEvents = async (): Promise<Calendar[]> => {

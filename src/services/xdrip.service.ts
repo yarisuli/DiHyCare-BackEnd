@@ -1,7 +1,7 @@
 import user from '../services/user.service';
 import { DataType, Prisma } from '../generated/prisma/client';
 import { EntryUpload } from '../types/generalTypes';
-import prisma from '../utils/prisma.server';
+import prisma from '../utils/prisma';
 
 const createEntries = async (
   userId: number,

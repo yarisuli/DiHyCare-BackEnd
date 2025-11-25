@@ -1,5 +1,5 @@
 import { Data } from '../generated/prisma';
-import prisma from '../utils/prisma.server';
+import prisma from '../utils/prisma';
 
 //get toda la data
 const getAllData = async (): Promise<Data[]> => {
