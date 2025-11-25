@@ -55,10 +55,8 @@ const createEvent = async (event: Omit<Calendar, 'id'>): Promise<Calendar> => {
 
 //update evento
 const updateEvent = async (
-  event: Omit<Calendar, 'id'>,
-  id: number
-): Promise<Calendar> => {
-  const { event: eventName, description, date, type, userId } = event;
+event: Omit<Calendar, 'id'>, id: number, userId: number): Promise<Calendar> => {
+  const { event: eventName, description, date, type } = event;
   return prisma.calendar.update({
     where: {
       id: id

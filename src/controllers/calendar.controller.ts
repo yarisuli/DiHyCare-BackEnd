@@ -73,10 +73,20 @@ const createEvent = async (req: Request, res: Response) => {
 //update evento
 const updateEvent = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params['id']);
-    const updatedEvent = await calendarService.updateEvent(req.body, id);
+    const eventId = parseInt(req.params['id'], 10);
+    if (isNaN(eventId)) return res.status(400).json({ error: 'Invalid event ID' });
+
+    const userId = Number(res.locals.userId);
+    if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+
+    const eventData = req.body as Omit<Calendar, 'id'>;
+
+    // pasar userId para que service valide ownership
+    const updatedEvent = await calendarService.updateEvent(eventData, eventId, userId);
     return res.status(200).json(updatedEvent);
   } catch (error: any) {
+    if (error.message === 'Event not found') return res.status(404).json({ message: 'Event not found.' });
+    if (error.message === 'Forbidden') return res.status(403).json({ message: 'Forbidden' });
     return res.status(500).json({
       message: 'Error at updating event.',
       error: error.message
