@@ -47,3 +47,5 @@ server.listen(PORT, () => {
     Ready to handle requests
   `);
 });
+
+export default app;
